@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 4.1.1 (Python 3.8.10 on linux)" generated="20211012 11:49:27.183" rpa="false" schemaversion="2">
+<suite id="s1" name="Test" source="/home/app/rfcode/test">
+<suite id="s1-s1" name="1-Scenarios" source="/home/app/rfcode/test/1-Scenarios">
+<suite id="s1-s1-s1" name="001-ReferenceData" source="/home/app/rfcode/test/1-Scenarios/001-ReferenceData.robot">
+<kw name="Open Application" library="generalActions" type="SETUP">
+<kw name="New Browser" library="Browser">
+<arg>browser=${BROWSER}</arg>
+<arg>headless=false</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<msg timestamp="20211012 11:49:28.890" level="FAIL">Variable '${BROWSER}' not found.</msg>
+<status status="FAIL" starttime="20211012 11:49:28.881" endtime="20211012 11:49:28.891"/>
+</kw>
+<status status="FAIL" starttime="20211012 11:49:28.878" endtime="20211012 11:49:28.893"/>
+</kw>
+<test id="s1-s1-s1-t1" name="$Scenario: User creates a Reference Data record">
+<status status="FAIL" starttime="20211012 11:49:28.893" endtime="20211012 11:49:28.898">Parent suite setup failed:
+Variable '${BROWSER}' not found.</status>
+</test>
+<kw name="Close Application" library="generalActions" type="TEARDOWN">
+<kw name="Close Browser" library="Browser">
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<msg timestamp="20211012 11:49:28.919" level="INFO">Starting Browser process /usr/local/lib/python3.8/dist-packages/Browser/wrapper/index.js using port 58469</msg>
+<msg timestamp="20211012 11:49:28.952" level="DEBUG">&lt;_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1634053768.951013600","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":3186,"referenced_errors":[{"created":"@1634053768.951009700","description":"failed to connect to all addresses","file":"src/core/lib/transport/error_utils.cc","file_line":146,"grpc_status":14}]}"
+&gt;</msg>
+<msg timestamp="20211012 11:49:29.059" level="DEBUG">&lt;_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1634053769.058426700","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":3186,"referenced_errors":[{"created":"@1634053769.058423900","description":"failed to connect to all addresses","file":"src/core/lib/transport/error_utils.cc","file_line":146,"grpc_status":14}]}"
+&gt;</msg>
+<msg timestamp="20211012 11:49:29.166" level="DEBUG">&lt;_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1634053769.165473400","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":3186,"referenced_errors":[{"created":"@1634053769.165469500","description":"failed to connect to all addresses","file":"src/core/lib/transport/error_utils.cc","file_line":146,"grpc_status":14}]}"
+&gt;</msg>
+<msg timestamp="20211012 11:49:29.272" level="DEBUG">&lt;_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1634053769.271268100","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":3186,"referenced_errors":[{"created":"@1634053769.271265400","description":"failed to connect to all addresses","file":"src/core/lib/transport/error_utils.cc","file_line":146,"grpc_status":14}]}"
+&gt;</msg>
+<msg timestamp="20211012 11:49:29.379" level="DEBUG">&lt;_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1634053769.378240600","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":3186,"referenced_errors":[{"created":"@1634053769.378237600","description":"failed to connect to all addresses","file":"src/core/lib/transport/error_utils.cc","file_line":146,"grpc_status":14}]}"
+&gt;</msg>
+<msg timestamp="20211012 11:49:29.486" level="DEBUG">&lt;_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1634053769.485056300","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":3186,"referenced_errors":[{"created":"@1634053769.485053400","description":"failed to connect to all addresses","file":"src/core/lib/transport/error_utils.cc","file_line":146,"grpc_status":14}]}"
+&gt;</msg>
+<msg timestamp="20211012 11:49:29.593" level="DEBUG">&lt;_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1634053769.591980300","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":3186,"referenced_errors":[{"created":"@1634053769.591977200","description":"failed to connect to all addresses","file":"src/core/lib/transport/error_utils.cc","file_line":146,"grpc_status":14}]}"
+&gt;</msg>
+<msg timestamp="20211012 11:49:29.700" level="DEBUG">&lt;_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1634053769.699753700","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":3186,"referenced_errors":[{"created":"@1634053769.699750700","description":"failed to connect to all addresses","file":"src/core/lib/transport/error_utils.cc","file_line":146,"grpc_status":14}]}"
+&gt;</msg>
+<msg timestamp="20211012 11:49:29.807" level="DEBUG">&lt;_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1634053769.805953600","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":3186,"referenced_errors":[{"created":"@1634053769.805950700","description":"failed to connect to all addresses","file":"src/core/lib/transport/error_utils.cc","file_line":146,"grpc_status":14}]}"
+&gt;</msg>
+<msg timestamp="20211012 11:49:29.915" level="DEBUG">&lt;_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1634053769.914457200","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":3186,"referenced_errors":[{"created":"@1634053769.914452900","description":"failed to connect to all addresses","file":"src/core/lib/transport/error_utils.cc","file_line":146,"grpc_status":14}]}"
+&gt;</msg>
+<msg timestamp="20211012 11:49:30.023" level="DEBUG">&lt;_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1634053770.021927500","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":3186,"referenced_errors":[{"created":"@1634053770.021923900","description":"failed to connect to all addresses","file":"src/core/lib/transport/error_utils.cc","file_line":146,"grpc_status":14}]}"
+&gt;</msg>
+<msg timestamp="20211012 11:49:30.128" level="DEBUG">&lt;_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1634053770.126890100","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":3186,"referenced_errors":[{"created":"@1634053770.126884500","description":"failed to connect to all addresses","file":"src/core/lib/transport/error_utils.cc","file_line":146,"grpc_status":14}]}"
+&gt;</msg>
+<msg timestamp="20211012 11:49:30.233" level="DEBUG">&lt;_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1634053770.232054600","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":3186,"referenced_errors":[{"created":"@1634053770.232052900","description":"failed to connect to all addresses","file":"src/core/lib/transport/error_utils.cc","file_line":146,"grpc_status":14}]}"
+&gt;</msg>
+<msg timestamp="20211012 11:49:30.340" level="DEBUG">&lt;_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1634053770.339360900","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":3186,"referenced_errors":[{"created":"@1634053770.339357100","description":"failed to connect to all addresses","file":"src/core/lib/transport/error_utils.cc","file_line":146,"grpc_status":14}]}"
+&gt;</msg>
+<msg timestamp="20211012 11:49:30.447" level="DEBUG">&lt;_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1634053770.446028800","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":3186,"referenced_errors":[{"created":"@1634053770.446025100","description":"failed to connect to all addresses","file":"src/core/lib/transport/error_utils.cc","file_line":146,"grpc_status":14}]}"
+&gt;</msg>
+<msg timestamp="20211012 11:49:30.554" level="DEBUG">&lt;_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1634053770.553141000","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":3186,"referenced_errors":[{"created":"@1634053770.553138400","description":"failed to connect to all addresses","file":"src/core/lib/transport/error_utils.cc","file_line":146,"grpc_status":14}]}"
+&gt;</msg>
+<msg timestamp="20211012 11:49:30.660" level="DEBUG">&lt;_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1634053770.659392300","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":3186,"referenced_errors":[{"created":"@1634053770.659388800","description":"failed to connect to all addresses","file":"src/core/lib/transport/error_utils.cc","file_line":146,"grpc_status":14}]}"
+&gt;</msg>
+<msg timestamp="20211012 11:49:30.766" level="DEBUG">&lt;_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1634053770.765381100","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":3186,"referenced_errors":[{"created":"@1634053770.765376900","description":"failed to connect to all addresses","file":"src/core/lib/transport/error_utils.cc","file_line":146,"grpc_status":14}]}"
+&gt;</msg>
+<msg timestamp="20211012 11:49:30.872" level="DEBUG">&lt;_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1634053770.871649500","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":3186,"referenced_errors":[{"created":"@1634053770.871646900","description":"failed to connect to all addresses","file":"src/core/lib/transport/error_utils.cc","file_line":146,"grpc_status":14}]}"
+&gt;</msg>
+<msg timestamp="20211012 11:49:30.980" level="DEBUG">&lt;_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1634053770.979513700","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":3186,"referenced_errors":[{"created":"@1634053770.979509900","description":"failed to connect to all addresses","file":"src/core/lib/transport/error_utils.cc","file_line":146,"grpc_status":14}]}"
+&gt;</msg>
+<msg timestamp="20211012 11:49:31.086" level="DEBUG">&lt;_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1634053771.085492500","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":3186,"referenced_errors":[{"created":"@1634053771.085489400","description":"failed to connect to all addresses","file":"src/core/lib/transport/error_utils.cc","file_line":146,"grpc_status":14}]}"
+&gt;</msg>
+<msg timestamp="20211012 11:49:31.194" level="DEBUG">&lt;_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1634053771.193224700","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":3186,"referenced_errors":[{"created":"@1634053771.193221700","description":"failed to connect to all addresses","file":"src/core/lib/transport/error_utils.cc","file_line":146,"grpc_status":14}]}"
+&gt;</msg>
+<msg timestamp="20211012 11:49:31.302" level="DEBUG">&lt;_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1634053771.301244800","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":3186,"referenced_errors":[{"created":"@1634053771.301239900","description":"failed to connect to all addresses","file":"src/core/lib/transport/error_utils.cc","file_line":146,"grpc_status":14}]}"
+&gt;</msg>
+<msg timestamp="20211012 11:49:31.410" level="DEBUG">&lt;_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1634053771.408914500","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":3186,"referenced_errors":[{"created":"@1634053771.408911500","description":"failed to connect to all addresses","file":"src/core/lib/transport/error_utils.cc","file_line":146,"grpc_status":14}]}"
+&gt;</msg>
+<msg timestamp="20211012 11:49:31.515" level="DEBUG">&lt;_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1634053771.514068100","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":3186,"referenced_errors":[{"created":"@1634053771.514066300","description":"failed to connect to all addresses","file":"src/core/lib/transport/error_utils.cc","file_line":146,"grpc_status":14}]}"
+&gt;</msg>
+<msg timestamp="20211012 11:49:31.621" level="DEBUG">&lt;_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1634053771.620074300","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":3186,"referenced_errors":[{"created":"@1634053771.620025100","description":"failed to connect to all addresses","file":"src/core/lib/transport/error_utils.cc","file_line":146,"grpc_status":14}]}"
+&gt;</msg>
+<msg timestamp="20211012 11:49:31.773" level="DEBUG">Connected to the playwright process at port 58469: body: "OK"
+</msg>
+<msg timestamp="20211012 11:49:31.794" level="INFO">No browser open, doing nothing</msg>
+<status status="PASS" starttime="20211012 11:49:28.906" endtime="20211012 11:49:31.795"/>
+</kw>
+<status status="PASS" starttime="20211012 11:49:28.903" endtime="20211012 11:49:31.796"/>
+</kw>
+<status status="FAIL" starttime="20211012 11:49:27.273" endtime="20211012 11:49:31.797">Suite setup failed:
+Variable '${BROWSER}' not found.</status>
+</suite>
+<status status="FAIL" starttime="20211012 11:49:27.259" endtime="20211012 11:49:31.804"/>
+</suite>
+<status status="FAIL" starttime="20211012 11:49:27.189" endtime="20211012 11:49:31.819"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="1" skip="0" id="s1" name="Test">Test</stat>
+<stat pass="0" fail="1" skip="0" id="s1-s1" name="1-Scenarios">Test.1-Scenarios</stat>
+<stat pass="0" fail="1" skip="0" id="s1-s1-s1" name="001-ReferenceData">Test.1-Scenarios.001-ReferenceData</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20211012 11:49:28.861" level="ERROR">Error in file '/home/app/rfcode/test/3-Settings/Variables.resource' on line 2: Setting variable '${BROWSER}' failed: Environment variable '%{BROWSER}' not found. Did you mean:
+    %{AUTO_BROWSER}</msg>
+</errors>
+</robot>
