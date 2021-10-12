@@ -109,6 +109,7 @@ if [ "$RF_CONTAINER_RUNNING" = "\"false\"" ] || [ -z "$RF_CONTAINER_RUNNING" ]; 
   docker run --name=$RF_CONTAINER_NAME \
     --detach \
     --privileged \
+    --restart=always \
     -v "/${RF_RESOURCES}":/home/app/rfcode/ \
     -v "/${RF_RESOURCES}/logs":/var/log/ \
     -e ROBOT_THREADS=4 \

@@ -5,8 +5,6 @@ set -o errexit
 
 mkdir -p workspace
 
-
-
 . ./caddy/caddy-image.sh 
 
 BASE_IMAGE=ubuntu:latest

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 4.1.1 (Python 3.8.10 on linux)" generated="20211012 18:34:40.719" rpa="false" schemaversion="2">
+<suite id="s1" name="Test" source="/home/app/rfcode/test">
+<suite id="s1-s1" name="1-Scenarios" source="/home/app/rfcode/test/1-Scenarios">
+<suite id="s1-s1-s1" name="001-ReferenceData" source="/home/app/rfcode/test/1-Scenarios/001-ReferenceData.robot">
+<kw name="Open Application" library="generalActions" type="SETUP">
+<kw name="New Browser" library="Browser">
+<arg>browser=${BROWSER}</arg>
+<arg>headless=false</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<msg timestamp="20211012 18:34:41.084" level="INFO">{"browser": "chromium", "headless": false, "handleSIGINT": true, "handleSIGTERM": true, "handleSIGHUP": true, "timeout": 30000.0, "devtools": false, "slowMo": 0.0, "tracesDir": "/home/app/rfcode/reports/America_New_York_12-10-2021_18-34-40/browser/traces/86c1a77f-cf47-4e89-8680-a4ed25fd1893"}</msg>
+<msg timestamp="20211012 18:34:41.087" level="INFO">Starting Browser process /usr/local/lib/python3.8/dist-packages/Browser/wrapper/index.js using port 58455</msg>
+<msg timestamp="20211012 18:34:41.095" level="DEBUG">&lt;_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1634078081.094267900","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":3186,"referenced_errors":[{"created":"@1634078081.094266900","description":"failed to connect to all addresses","file":"src/core/lib/transport/error_utils.cc","file_line":146,"grpc_status":14}]}"
+&gt;</msg>
+<msg timestamp="20211012 18:34:41.197" level="DEBUG">&lt;_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1634078081.196517200","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":3186,"referenced_errors":[{"created":"@1634078081.196516400","description":"failed to connect to all addresses","file":"src/core/lib/transport/error_utils.cc","file_line":146,"grpc_status":14}]}"
+&gt;</msg>
+<msg timestamp="20211012 18:34:41.299" level="DEBUG">&lt;_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1634078081.298516200","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":3186,"referenced_errors":[{"created":"@1634078081.298515300","description":"failed to connect to all addresses","file":"src/core/lib/transport/error_utils.cc","file_line":146,"grpc_status":14}]}"
+&gt;</msg>
+<msg timestamp="20211012 18:34:41.401" level="DEBUG">&lt;_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1634078081.400660700","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":3186,"referenced_errors":[{"created":"@1634078081.400659600","description":"failed to connect to all addresses","file":"src/core/lib/transport/error_utils.cc","file_line":146,"grpc_status":14}]}"
+&gt;</msg>
+<msg timestamp="20211012 18:34:41.503" level="DEBUG">&lt;_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1634078081.502622800","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":3186,"referenced_errors":[{"created":"@1634078081.502622100","description":"failed to connect to all addresses","file":"src/core/lib/transport/error_utils.cc","file_line":146,"grpc_status":14}]}"
+&gt;</msg>
+<msg timestamp="20211012 18:34:41.605" level="DEBUG">&lt;_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1634078081.604899400","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":3186,"referenced_errors":[{"created":"@1634078081.604898400","description":"failed to connect to all addresses","file":"src/core/lib/transport/error_utils.cc","file_line":146,"grpc_status":14}]}"
+&gt;</msg>
+<msg timestamp="20211012 18:34:41.707" level="DEBUG">&lt;_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses"
+	debug_error_string = "{"created":"@1634078081.707201600","description":"Failed to pick subchannel","file":"src/core/ext/filters/client_channel/client_channel.cc","file_line":3186,"referenced_errors":[{"created":"@1634078081.707200800","description":"failed to connect to all addresses","file":"src/core/lib/transport/error_utils.cc","file_line":146,"grpc_status":14}]}"
+&gt;</msg>
+<msg timestamp="20211012 18:34:41.820" level="DEBUG">Connected to the playwright process at port 58455: body: "OK"
+</msg>
+<kw name="On Error" library="generalActions">
+<kw name="Log To Console" library="BuiltIn">
+<arg>"Testing Failed"</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20211012 18:34:41.898" endtime="20211012 18:34:41.898"/>
+</kw>
+<status status="PASS" starttime="20211012 18:34:41.898" endtime="20211012 18:34:41.899"/>
+</kw>
+<msg timestamp="20211012 18:34:41.901" level="FAIL">Error: browserType.launch: 
+╔════════════════════════════════════════════════════════════╗
+║ Host system is missing a few dependencies to run browsers. ║
+║ Please install them with the following command:            ║
+║                                                            ║
+║     sudo npx playwright install-deps                       ║
+║                                                            ║
+║ &lt;3 Playwright Team                                         ║
+╚════════════════════════════════════════════════════════════╝</msg>
+<msg timestamp="20211012 18:34:41.901" level="DEBUG">Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/Browser/browser.py", line 859, in run_keyword
+    raise e
+  File "/usr/local/lib/python3.8/dist-packages/Browser/browser.py", line 849, in run_keyword
+    return DynamicCore.run_keyword(self, name, args, kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/robotlibcore.py", line 94, in run_keyword
+    return self.keywords[name](*args, **(kwargs or {}))
+  File "/usr/local/lib/python3.8/dist-packages/Browser/keywords/playwright_state.py", line 389, in new_browser
+    return response.body
+  File "/usr/lib/python3.8/contextlib.py", line 131, in __exit__
+    self.gen.throw(type, value, traceback)
+  File "/usr/local/lib/python3.8/dist-packages/Browser/playwright.py", line 153, in grpc_channel
+    raise AssertionError(error.details())</msg>
+<status status="FAIL" starttime="20211012 18:34:41.083" endtime="20211012 18:34:41.901"/>
+</kw>
+<status status="FAIL" starttime="20211012 18:34:41.082" endtime="20211012 18:34:41.902"/>
+</kw>
+<test id="s1-s1-s1-t1" name="$Scenario: User creates a Reference Data record">
+<status status="FAIL" starttime="20211012 18:34:41.902" endtime="20211012 18:34:41.902">Parent suite setup failed:
+Error: browserType.launch: 
+╔════════════════════════════════════════════════════════════╗
+║ Host system is missing a few dependencies to run browsers. ║
+║ Please install them with the following command:            ║
+║                                                            ║
+║     sudo npx playwright install-deps                       ║
+║                                                            ║
+║ &lt;3 Playwright Team                                         ║
+╚════════════════════════════════════════════════════════════╝</status>
+</test>
+<kw name="Close Application" library="generalActions" type="TEARDOWN">
+<kw name="Close Browser" library="Browser">
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<msg timestamp="20211012 18:34:41.908" level="INFO">No browser open, doing nothing</msg>
+<status status="PASS" starttime="20211012 18:34:41.905" endtime="20211012 18:34:41.908"/>
+</kw>
+<status status="PASS" starttime="20211012 18:34:41.904" endtime="20211012 18:34:41.908"/>
+</kw>
+<status status="FAIL" starttime="20211012 18:34:40.745" endtime="20211012 18:34:41.908">Suite setup failed:
+Error: browserType.launch: 
+╔════════════════════════════════════════════════════════════╗
+║ Host system is missing a few dependencies to run browsers. ║
+║ Please install them with the following command:            ║
+║                                                            ║
+║     sudo npx playwright install-deps                       ║
+║                                                            ║
+║ &lt;3 Playwright Team                                         ║
+╚════════════════════════════════════════════════════════════╝</status>
+</suite>
+<status status="FAIL" starttime="20211012 18:34:40.742" endtime="20211012 18:34:41.910"/>
+</suite>
+<status status="FAIL" starttime="20211012 18:34:40.721" endtime="20211012 18:34:41.911"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="1" skip="0" id="s1" name="Test">Test</stat>
+<stat pass="0" fail="1" skip="0" id="s1-s1" name="1-Scenarios">Test.1-Scenarios</stat>
+<stat pass="0" fail="1" skip="0" id="s1-s1-s1" name="001-ReferenceData">Test.1-Scenarios.001-ReferenceData</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

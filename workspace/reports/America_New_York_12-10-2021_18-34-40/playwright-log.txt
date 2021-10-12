@@ -1,0 +1,33 @@
+{"level":30,"time":"2021-10-12T22:34:41.801Z","pid":2449,"hostname":"145ca2484746","msg":"Listening on 58455"}
+2021-10-12T22:34:41.831Z pw:api => browserType.launch started
+2021-10-12T22:34:41.892Z pw:api <= browserType.launch failed
+================= Original suppressed error =================
+{ browserType.launch: 
+╔════════════════════════════════════════════════════════════╗
+║ Host system is missing a few dependencies to run browsers. ║
+║ Please install them with the following command:            ║
+║                                                            ║
+║     sudo npx playwright install-deps                       ║
+║                                                            ║
+║ <3 Playwright Team                                         ║
+╚════════════════════════════════════════════════════════════╝
+    at /usr/local/lib/python3.8/dist-packages/Browser/wrapper/index.js:26731:64
+    at step (/usr/local/lib/python3.8/dist-packages/Browser/wrapper/index.js:26668:23)
+    at Object.next (/usr/local/lib/python3.8/dist-packages/Browser/wrapper/index.js:26649:53)
+    at /usr/local/lib/python3.8/dist-packages/Browser/wrapper/index.js:26643:71
+    at __webpack_modules__../node/playwright-wrapper/playwright-state.ts.__awaiter (/usr/local/lib/python3.8/dist-packages/Browser/wrapper/index.js:26639:12)
+    at _newBrowser (/usr/local/lib/python3.8/dist-packages/Browser/wrapper/index.js:26718:12)
+    at /usr/local/lib/python3.8/dist-packages/Browser/wrapper/index.js:27326:42
+    at step (/usr/local/lib/python3.8/dist-packages/Browser/wrapper/index.js:26668:23)
+    at Object.next (/usr/local/lib/python3.8/dist-packages/Browser/wrapper/index.js:26649:53)
+    at /usr/local/lib/python3.8/dist-packages/Browser/wrapper/index.js:26643:71
+    at __webpack_modules__../node/playwright-wrapper/playwright-state.ts.__awaiter (/usr/local/lib/python3.8/dist-packages/Browser/wrapper/index.js:26639:12)
+    at newBrowser (/usr/local/lib/python3.8/dist-packages/Browser/wrapper/index.js:27319:12)
+    at PlaywrightServer.<anonymous> (/usr/local/lib/python3.8/dist-packages/Browser/wrapper/index.js:24840:50)
+    at step (/usr/local/lib/python3.8/dist-packages/Browser/wrapper/index.js:24782:23)
+    at Object.next (/usr/local/lib/python3.8/dist-packages/Browser/wrapper/index.js:24763:53)
+    at /usr/local/lib/python3.8/dist-packages/Browser/wrapper/index.js:24757:71
+    at __webpack_modules__../node/playwright-wrapper/grpc-service.ts.__awaiter (/usr/local/lib/python3.8/dist-packages/Browser/wrapper/index.js:24753:12)
+    at PlaywrightServer.newBrowser (/usr/local/lib/python3.8/dist-packages/Browser/wrapper/index.js:24831:55)
+    at handleUnary (/usr/local/lib/python3.8/dist-packages/Browser/wrapper/index.js:18453:13) name: 'Error' }
+=============================================================
