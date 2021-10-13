@@ -3,12 +3,39 @@
 set -o nounset
 set -o errexit
 
+    -b ${BASE_IMAGE} \
+    -i ${RF_IMAGE} \
+    -v ${RF_VOLUME_NAME}
+    -n ${RF_CONTAINER_NAME} \
+    -r ${RESOURCES} \
+    -c ${CONTINENT} \
+    -l ${PLACE} \
+    -t ${ROBOT_THREADS}
+    -z ${ZIP_REPORT} \
+    -a ${ALLURE_REPORT} \
+    -u ${AWS_UPLOAD_TO_S3} \
+    -g ${PLAYWRIGHT_SKIP_BROWSER_GC} \
+    -s ${NVM_SYMLINK_CURRENT} \
+    -p ${RF_PORT}
+
 function usage {
-  echo "Usage: ./slims-image.sh [ -b | --bimage] [ -r | --rimage] [ -h | --help ]"
-  echo " -b  | --bimage                       Base Image f.e. '-i ubuntu:latest'"
-  echo " -r  | --rimage                       RF Image f.e. '-i rf-image:latest'"
-  echo " -n  | --name                         Container name f.e. '-n rf-app'"
-  echo " -d  | --directory                    Resource directory f.e. '-d ./rfcode'"
+  echo "Usage: ./slims-image.sh [ -b | --bimage] [ -i | --image] [ -v | --vname] [ -n | --cname] [ -r | --resources]
+                                [ -c | --continent] [ -l | --location] [ -t | --threads] [ -z | --zip] [ -a | --allure]
+                                [ -u | --upload] [ -g | --gc] [ -s | --symlink] [ -p | --port] [ -h | --help ]"
+  echo " -b  | --bimage                       Base Image f.e. '-b ubuntu:latest'"
+  echo " -i  | --image                        RF Image f.e. '-i rf-image:latest'"
+  echo " -v  | --vname                        Volumne name f.e. '-v rf-vol'"
+  echo " -n  | --cname                        Container name f.e. '-n rf-app'"
+  echo " -r  | --resources                    Resource directory f.e. '-d ./rfcode'"
+  echo " -c  | --continent                    Continent f.e. '-c America'"  
+  echo " -l  | --location                     Location f.e. '-l New York'"
+  echo " -t  | --threads                      Robot threads f.e. '-t 4'"
+  echo " -z  | --zip                          Zip report f.e. '-z true'"
+  echo " -a  | --allure                       Allure report f.e. '-a true'"
+  echo " -u  | --upload                       Continent f.e. '-c America'"
+  echo " -g  | --gc                           Playwright skip browser gc f.e. '-g 1'"
+  echo " -s  | --symlink                      NVM Symlink Current f.e. '-s true'"
+  echo " -p  | --port                         Port f.e. '-p 8080'"  
   echo " -h  | --help                         Show this menu"
 }
 
@@ -21,23 +48,75 @@ timestamp() {
 RF_BASE_IMAGE=''
 RF_IMAGE=''
 RF_CONTAINER_NAME=''
+RF_VOLUME_NAME=''
 RF_RESOURCES=''
+
+CONTINENT=''
+PLACE=''
+ROBOT_THREADS=''
+ZIP_REPORT=''
+ALLURE_REPORT=''
+AWS_UPLOAD_TO_S3=''
+PLAYWRIGHT_SKIP_BROWSER_GC=''
+NVM_SYMLINK_CURRENT=''
+RF_PORT=''
+
 
 while(($#)) ; do
     case $1 in
-        -i | --image )                  shift
+        -b | --bmage )                  shift
                                         RF_BASE_IMAGE="$1"
                                         shift
                                         ;;
-        -r | --rimage )                 shift
+        -i | --image )                 shift
                                         RF_IMAGE="$1"
                                         shift
                                         ;;
-        -n | --name )                   shift
+        -n | --cname )                  shift
                                         RF_CONTAINER_NAME="$1"
                                         shift
+                                        ;;                                        
+        -v | --vname )                  shift
+                                        RF_VOLUME_NAME="$1"
+                                        shift
                                         ;;
-        -d | --directory )              shift
+        -c | --continent )              shift
+                                        CONTINENT="$1"
+                                        shift
+                                        ;;
+        -l | --location )               shift
+                                        PLACE="$1"
+                                        shift
+                                        ;;
+        -t | --threads )                shift
+                                        ROBOT_THREADS="$1"
+                                        shift
+                                        ;;
+        -z | --zip )                    shift
+                                        ZIP_REPORT="$1"
+                                        shift
+                                        ;;
+        -a | --allure )                 shift
+                                        ALLURE_REPORT="$1"
+                                        shift
+                                        ;;
+        -u | --upload )                 shift
+                                        AWS_UPLOAD_TO_S3="$1"
+                                        shift
+                                        ;;
+        -g | --gc )                  shift
+                                        PLAYWRIGHT_SKIP_BROWSER_GC="$1"
+                                        shift
+                                        ;;
+        -s | --symlink )                shift
+                                        NVM_SYMLINK_CURRENT="$1"
+                                        shift
+                                        ;;
+        -p | --port )                   shift
+                                        RF_PORT="$1"
+                                        shift
+                                        ;;
+        -r | --resources )              shift
                                         RF_RESOURCES="$1"
                                         shift
                                         ;;
@@ -53,21 +132,51 @@ while(($#)) ; do
 done
 
 if [[ ! -n "$RF_BASE_IMAGE" ]]; then
-	echo "$(timestamp) ERROR: Base image name not provided"
-	exit 1
+  RF_BASE_IMAGE=ubuntu:latest
 fi
 if [[ ! -n "$RF_IMAGE" ]]; then
 	echo "$(timestamp) ERROR: RF image name not provided"
 	exit 1
 fi
 if [[ ! -n "$RF_CONTAINER_NAME" ]]; then
-	echo "$(timestamp) ERROR: Container name not provided"
-	exit 1
+	RF_CONTAINER_NAME="rfcode-app"
+fi
+if [[ ! -n "$RF_VOLUME_NAME" ]]; then
+	RF_VOLUME_NAME="rf-volume"
 fi
 if [[ ! -n "$RF_RESOURCES" ]]; then
-	echo "$(timestamp) ERROR: Resrouces directory name not provided"
+	RF_RESOURCES="$(dirname "$PWD")/workspace"
+fi
+if [[ ! -n "$CONTINENT" ]]; then
+	echo "$(timestamp) ERROR: Continent not provided"
 	exit 1
 fi
+if [[ ! -n "$PLACE" ]]; then
+	echo "$(timestamp) ERROR: Location not provided"
+	exit 1
+fi
+if [[ ! -n "$ROBOT_THREADS" ]]; then
+	ROBOT_THREADS=1
+fi
+if [[ ! -n "$ZIP_REPORT" ]]; then
+	ZIP_REPORT=false
+fi
+if [[ ! -n "$ALLURE_REPORT" ]]; then
+	ALLURE_REPORT=false
+fi
+if [[ ! -n "$AWS_UPLOAD_TO_S3" ]]; then
+	AWS_UPLOAD_TO_S3=false
+fi
+if [[ ! -n "$PLAYWRIGHT_SKIP_BROWSER_GC" ]]; then
+	PLAYWRIGHT_SKIP_BROWSER_GC=1
+fi
+if [[ ! -n "$NVM_SYMLINK_CURRENT" ]]; then
+	NVM_SYMLINK_CURRENT=true
+fi
+if [[ ! -n "$RF_PORT" ]]; then
+	RF_PORT=8080
+fi
+
 RF_IMAGE_ID=""
 RF_IMAGE_ID=$(docker image inspect --format=\"{{.Id}}\" ${RF_IMAGE} 2> /dev/null) :;
 
@@ -105,15 +214,6 @@ if [ "$RF_CONTAINER_RUNNING" = "\"false\"" ] || [ -z "$RF_CONTAINER_RUNNING" ]; 
 
   echo "$(timestamp) Creating new rf volume"
   docker volume create $RF_VOLUME_NAME
-
-  PABOT_OPTIONS='--testlevelsplit --artifactsinsubfolders'
-  ROBOT_OPTIONS='--loglevel DEBUG'
-  CONTINENT=America
-  PLACE=New_York
-  
-  mkdir -p "${RF_RESOURCES}/reports"
-  mkdir -p "${RF_RESOURCES}/logs"
-  mkdir -p "${RF_RESOURCES}/test"
   
   docker run --rm \
     --name=$RF_CONTAINER_NAME \

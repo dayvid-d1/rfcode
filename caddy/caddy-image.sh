@@ -4,7 +4,7 @@ set -o nounset
 set -o errexit
 
 usage() {
-  echo "Usage: ./slims-image.sh [ -h | --help ]"
+  echo "Usage: ./slims-image.sh [ -i | --image ] [ -v | --vol ] [ -c | --container ] [ -u | --user ] [ -s | --secret ] [ -p | --port ][ -h | --help ]"
   echo " -i  | --image                        Image name f.e. '-i davidclement/caddy-image:latest'"
   echo " -v  | --vol                          Volume name f.e. '-v caddy-volume'"
   echo " -c  | --container                    Container name f.e. '-c caddy-app'"
@@ -64,7 +64,28 @@ while(($#)) ; do
     esac
 done
 
-
+if [[ ! -n "$CADDY_IMAGE" ]]; then
+	echo "$(timestamp) ERROR: Caddy image name not provided"
+	exit 1
+fi
+if [[ ! -n "$CADDY_CONTAINER_NAME" ]]; then
+	CADDY_CONTAINER_NAME="caddy-app"
+fi
+if [[ ! -n "$CADDY_VOLUME_NAME" ]]; then
+	CADDY_VOLUME_NAME="caddy-volume"
+fi
+if [[ ! -n "$CADDY_USER" ]]; then
+	echo "$(timestamp) ERROR: Caddy username not provided"
+	exit 1
+fi
+if [[ ! -n "$CADDY_SECRET" ]]; then
+	echo "$(timestamp) ERROR: Caddy secret not provided"
+	exit 1
+fi
+if [[ ! -n "$CADDY_PORT" ]]; then
+	echo "$(timestamp) ERROR: Caddy port not provided"
+	exit 1
+fi
 
 CADDY_IMAGE_ID=""
 CADDY_IMAGE_ID=$(docker image inspect --format=\"{{.Id}}\" ${CADDY_IMAGE} 2> /dev/null) :;
