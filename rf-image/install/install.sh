@@ -50,5 +50,6 @@ rm -rf /var/lib/apt/lists /var/cache/apt/*.bin
 
 pip3 install --disable-pip-version-check --no-cache-dir --no-warn-script-location -r /tmp/requirements.txt
 rfbrowser init
-npx playwright install-deps
+
 rm -rf  /tmp/*
+chmod +x /etc/run-tests

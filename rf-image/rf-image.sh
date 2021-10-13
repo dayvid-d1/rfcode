@@ -68,7 +68,7 @@ if [[ ! -n "$RF_RESOURCES" ]]; then
 	echo "$(timestamp) ERROR: Resrouces directory name not provided"
 	exit 1
 fi
-RF_BASE_IMAGE_ID=$(docker image inspect --format=\"{{.Id}}\" ${RF_BASE_IMAGE} 2> /dev/null) :;
+RF_IMAGE_ID=""
 RF_IMAGE_ID=$(docker image inspect --format=\"{{.Id}}\" ${RF_IMAGE} 2> /dev/null) :;
 
 
@@ -83,6 +83,10 @@ RF_IMAGE_ID=$(docker image inspect --format=\"{{.Id}}\" ${RF_IMAGE} 2> /dev/null
 cd ${CURRENT_DIR}
 
 RF_VOLUME_NAME="rf-volume"
+RF_CONTAINER_RUNNING=''
+RF_CONTAINER_STATUS=''
+RF_VOLUME_SCOPE=''
+
 RF_CONTAINER_RUNNING=$(docker inspect --format=\"{{.State.Running}}\" ${RF_CONTAINER_NAME} 2> /dev/null) :;
 RF_CONTAINER_STATUS=$(docker inspect --format=\"{{.State.Status}}\" ${RF_CONTAINER_NAME} 2> /dev/null) :;
 RF_VOLUME_SCOPE=$(docker volume inspect --format=\"{{.Scope}}\" ${RF_VOLUME_NAME} 2> /dev/null) :;
@@ -106,9 +110,13 @@ if [ "$RF_CONTAINER_RUNNING" = "\"false\"" ] || [ -z "$RF_CONTAINER_RUNNING" ]; 
   ROBOT_OPTIONS='--loglevel DEBUG'
   CONTINENT=America
   PLACE=New_York
-  winpty docker run --rm -it
+  
+  mkdir -p "${RF_RESOURCES}/reports"
+  mkdir -p "${RF_RESOURCES}/logs"
+  mkdir -p "${RF_RESOURCES}/test"
+  
+  docker run --rm \
     --name=$RF_CONTAINER_NAME \
-    --user=app \
     -v "/${RF_RESOURCES}":/home/app/rfcode/ \
     -v "/${RF_RESOURCES}/logs":/var/log/ \
     -e ROBOT_THREADS=4 \

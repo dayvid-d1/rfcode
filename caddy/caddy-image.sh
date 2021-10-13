@@ -5,6 +5,12 @@ set -o errexit
 
 usage() {
   echo "Usage: ./slims-image.sh [ -h | --help ]"
+  echo " -i  | --image                        Image name f.e. '-i davidclement/caddy-image:latest'"
+  echo " -v  | --vol                          Volume name f.e. '-v caddy-volume'"
+  echo " -c  | --container                    Container name f.e. '-c caddy-app'"
+  echo " -u  | --user                         Caddy User f.e. '-u rfcode'"
+  echo " -s  | --secret                        Caddy secret f.e. '-s xyz'"
+  echo " -p  | --port                         Caddy port f.e. '-p 8129'"
   echo " -h  | --help                         Show this menu"
 }
 
@@ -14,11 +20,39 @@ timestamp() {
 	date +"%Y-%m-%d %T"
 }
 
-CADDY_IMAGE="davidclement/caddy-image:latest"
-CONTAINER_NAME='caddy-app'
+CADDY_IMAGE=''
+CADDY_CONTAINER_NAME=''
+CADDY_VOLUME_NAME=''
+CADDY_USER=''
+CADDY_SECRET=''
+CADDY_PORT=''
 
 while(($#)) ; do
     case $1 in
+        -i | --image )                  shift
+                                        CADDY_IMAGE="$1"
+                                        shift
+                                        ;;
+        -c | --container )              shift
+                                        CADDY_CONTAINER_NAME="$1"
+                                        shift
+                                        ;;                                        
+        -v | --volume )                 shift
+                                        CADDY_VOLUME_NAME="$1"
+                                        shift
+                                        ;;
+        -u | --user )                   shift
+                                        CADDY_USER="$1"
+                                        shift
+                                        ;;
+        -s | --secret )                 shift
+                                        CADDY_SECRET="$1"
+                                        shift
+                                        ;;
+        -p | --port )                   shift
+                                        CADDY_PORT="$1"
+                                        shift
+                                        ;;
         -h | --help )                   shift
                                         usage
                                         exit
@@ -29,45 +63,51 @@ while(($#)) ; do
                                         ;;
     esac
 done
+
+
+
 CADDY_IMAGE_ID=""
 CADDY_IMAGE_ID=$(docker image inspect --format=\"{{.Id}}\" ${CADDY_IMAGE} 2> /dev/null) :;
 
 
-if [ -z "$CADDY_IMAGE_ID" ]; then
-  cd "$SCRIPT_DIR"
+if [ -z "$CADDY_IMAGE_ID" ]; then  
   echo "$(timestamp) Building Base image"
-  docker build -t $CADDY_IMAGE .
+    #cd "$SCRIPT_DIR"
+    #docker build -t $CADDY_IMAGE .
+  docker pull $CADDY_IMAGE
   echo "$(timestamp) Base image built successfully"
 fi
 cd ${CURRENT_DIR}
 
-VOLUME_NAME="caddy-volume"
-CONTAINER_RUNNING=$(docker inspect --format=\"{{.State.Running}}\" ${CONTAINER_NAME} 2> /dev/null) :;
-CONTAINER_STATUS=$(docker inspect --format=\"{{.State.Status}}\" ${CONTAINER_NAME} 2> /dev/null) :;
-VOLUME_SCOPE=$(docker volume inspect --format=\"{{.Scope}}\" ${VOLUME_NAME} 2> /dev/null) :;
+CADDY_CONTAINER_RUNNING=''
+CADDY_CONTAINER_STATUS=''
+CADDY_VOLUME_SCOPE=''
+CADDY_CONTAINER_RUNNING=$(docker inspect --format=\"{{.State.Running}}\" ${CADDY_CONTAINER_NAME} 2> /dev/null]) :;
+CADDY_CONTAINER_STATUS=$(docker inspect --format=\"{{.State.Status}}\" ${CADDY_CONTAINER_NAME} 2> /dev/null) :;
+CADDY_VOLUME_SCOPE=$(docker volume inspect --format=\"{{.Scope}}\" ${CADDY_VOLUME_NAME} 2> /dev/null) :;
 
-echo "$(timestamp) Caddy container $CONTAINER_NAME to be set"
-if [ "$CONTAINER_RUNNING" = "\"false\"" ] || [ -z "$CONTAINER_RUNNING" ]; then   
-  if [ "${CONTAINER_STATUS}" = "\"exited\"" ] || [ "${CONTAINER_STATUS}" = "\"created\"" ]; then
+echo "$(timestamp) Caddy container $CADDY_CONTAINER_NAME to be set"
+if [ "$CADDY_CONTAINER_RUNNING" = "\"false\"" ] || [ -z "$CADDY_CONTAINER_RUNNING" ]; then   
+  if [ "${CADDY_CONTAINER_STATUS}" = "\"exited\"" ] || [ "${CADDY_CONTAINER_STATUS}" = "\"created\"" ]; then
     echo "$(timestamp) Removing old caddy container"
-    docker container rm ${CONTAINER_NAME}
+    docker container rm ${CADDY_CONTAINER_NAME}
   fi  
 
-  if [ "${VOLUME_SCOPE}" = "\"local\"" ]; then
+  if [ "${CADDY_VOLUME_SCOPE}" = "\"local\"" ]; then
     echo "$(timestamp) Removing old caddy volume"
-    docker volume rm $VOLUME_NAME
+    docker volume rm $CADDY_VOLUME_NAME
   fi
 
   echo "$(timestamp) Creating new caddy volume"
-  docker volume create $VOLUME_NAME
+  docker volume create $CADDY_VOLUME_NAME
 
   echo "$(timestamp) Initiating caddy container run"
-  docker run --name=$CONTAINER_NAME \
+  docker run --name=$CADDY_CONTAINER_NAME \
     --detach \
     --restart=always \
-    -v=$VOLUME_NAME:/data \
-    --env=APP_USERNAME="genohm" \
-    --env=APP_PASSWORD_HASH="JDJhJDEwJDF5U3AuelBxMENaN2o4M1lHWS92cE9iU1QyNjRSWTlCRFJYdmFYT0l3VlRtaXBCcXlGMGRx" \
-    --publish=8129:8080 \
+    -v=$CADDY_VOLUME_NAME:/data \
+    --env=APP_USERNAME="${CADDY_USER}" \
+    --env=APP_PASSWORD_HASH="${CADDY_SECRET}" \
+    --publish=${CADDY_PORT}:8080 \
     $CADDY_IMAGE
 fi
