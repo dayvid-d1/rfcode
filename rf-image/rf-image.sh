@@ -166,14 +166,14 @@ RF_IMAGE_ID=""
 RF_IMAGE_ID=$(docker image inspect --format=\"{{.Id}}\" ${RF_IMAGE} 2> /dev/null) :;
 
 
-#if [ -z "$RF_IMAGE_ID" ]; then
+if [ -z "$RF_IMAGE_ID" ]; then
   cd "$SCRIPT_DIR"
   echo "$(timestamp) Building Base image"
   docker build \
   --build-arg RF_BASE_IMAGE=$RF_BASE_IMAGE \
   -t $RF_IMAGE .
   echo "$(timestamp) Base image built successfully"
-#fi
+fi
 cd ${CURRENT_DIR}
 
 RF_CONTAINER_RUNNING=''

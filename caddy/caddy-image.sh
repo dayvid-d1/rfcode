@@ -95,7 +95,7 @@ if [ -z "$CADDY_IMAGE_ID" ]; then
   echo "$(timestamp) Building Base image"
     #cd "$SCRIPT_DIR"
     #docker build -t $CADDY_IMAGE .
-  docker pull $CADDY_IMAGE
+    docker pull $CADDY_IMAGE
   echo "$(timestamp) Base image built successfully"
 fi
 cd ${CURRENT_DIR}

@@ -28,8 +28,10 @@ ENV RUN_TESTS=/home/${USERNAME}/rfcode/run-tests
 ENV PATH=$PATH:${ROBOT_REPORTS_DIR}:${ROBOT_TESTS_DIR}:${ROBOT_SETUP_DIR}
 ENV AUTO_BROWSER=chromium
 
-RUN dos2unix /tmp/install.sh
-RUN . /tmp/install.sh
+RUN apt-get update; \
+    apt-get install -y dos2unix; \
+    dos2unix /tmp/install.sh; \
+    . /tmp/install.sh
 COPY /bin/menu.xml /etc/xdg/openbox/
 
 WORKDIR /home/app/rfcode
