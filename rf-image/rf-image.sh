@@ -106,10 +106,9 @@ if [ "$RF_CONTAINER_RUNNING" = "\"false\"" ] || [ -z "$RF_CONTAINER_RUNNING" ]; 
   ROBOT_OPTIONS='--loglevel DEBUG'
   CONTINENT=America
   PLACE=New_York
-  docker run --name=$RF_CONTAINER_NAME \
-    --detach \
-    --privileged \
-    --restart=always \
+  winpty docker run --rm -it
+    --name=$RF_CONTAINER_NAME \
+    --user=app \
     -v "/${RF_RESOURCES}":/home/app/rfcode/ \
     -v "/${RF_RESOURCES}/logs":/var/log/ \
     -e ROBOT_THREADS=4 \
