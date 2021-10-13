@@ -13,6 +13,7 @@ CADDY_SECRET="JDJhJDEwJDF5U3AuelBxMENaN2o4M1lHWS92cE9iU1QyNjRSWTlCRFJYdmFYT0l3Vl
 CADDY_PORT=8129
 
 chmod +x ./caddy/caddy-image.sh
+dos2unix ./caddy/caddy-image.sh
 . ./caddy/caddy-image.sh \
     -i ${CADDY_IMAGE} \
     -u ${CADDY_USER} \
@@ -33,8 +34,8 @@ PLACE="New_York"
 ROBOT_THREADS=4
 
 chmod +x ./rf-image/rf-image.sh
+dos2unix ./rf-image/rf-image.sh
 . ./rf-image/rf-image.sh \
-    -b ${BASE_IMAGE} \
     -i ${RF_IMAGE} \
     -c ${CONTINENT} \
     -l ${PLACE} \

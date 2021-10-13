@@ -3,21 +3,6 @@
 set -o nounset
 set -o errexit
 
-    -b ${BASE_IMAGE} \
-    -i ${RF_IMAGE} \
-    -v ${RF_VOLUME_NAME}
-    -n ${RF_CONTAINER_NAME} \
-    -r ${RESOURCES} \
-    -c ${CONTINENT} \
-    -l ${PLACE} \
-    -t ${ROBOT_THREADS}
-    -z ${ZIP_REPORT} \
-    -a ${ALLURE_REPORT} \
-    -u ${AWS_UPLOAD_TO_S3} \
-    -g ${PLAYWRIGHT_SKIP_BROWSER_GC} \
-    -s ${NVM_SYMLINK_CURRENT} \
-    -p ${RF_PORT}
-
 function usage {
   echo "Usage: ./slims-image.sh [ -b | --bimage] [ -i | --image] [ -v | --vname] [ -n | --cname] [ -r | --resources]
                                 [ -c | --continent] [ -l | --location] [ -t | --threads] [ -z | --zip] [ -a | --allure]
@@ -191,14 +176,13 @@ RF_IMAGE_ID=$(docker image inspect --format=\"{{.Id}}\" ${RF_IMAGE} 2> /dev/null
 #fi
 cd ${CURRENT_DIR}
 
-RF_VOLUME_NAME="rf-volume"
 RF_CONTAINER_RUNNING=''
 RF_CONTAINER_STATUS=''
 RF_VOLUME_SCOPE=''
 
-RF_CONTAINER_RUNNING=$(docker inspect --format=\"{{.State.Running}}\" ${RF_CONTAINER_NAME} 2> /dev/null) :;
-RF_CONTAINER_STATUS=$(docker inspect --format=\"{{.State.Status}}\" ${RF_CONTAINER_NAME} 2> /dev/null) :;
-RF_VOLUME_SCOPE=$(docker volume inspect --format=\"{{.Scope}}\" ${RF_VOLUME_NAME} 2> /dev/null) :;
+RF_CONTAINER_RUNNING=$(docker inspect --format=\"{{.State.Running}}\" ${RF_CONTAINER_NAME} 2> /dev/null)
+RF_CONTAINER_STATUS=$(docker inspect --format=\"{{.State.Status}}\" ${RF_CONTAINER_NAME} 2> /dev/null)
+RF_VOLUME_SCOPE=$(docker volume inspect --format=\"{{.Scope}}\" ${RF_VOLUME_NAME} 2> /dev/null)
 
 echo "$(timestamp) RF container $RF_CONTAINER_NAME to be set"
 if [ "$RF_CONTAINER_RUNNING" = "\"false\"" ] || [ -z "$RF_CONTAINER_RUNNING" ]; then   
@@ -217,20 +201,21 @@ if [ "$RF_CONTAINER_RUNNING" = "\"false\"" ] || [ -z "$RF_CONTAINER_RUNNING" ]; 
   
   docker run --rm \
     --name=$RF_CONTAINER_NAME \
+    --user=app \
     -v "/${RF_RESOURCES}":/home/app/rfcode/ \
     -v "/${RF_RESOURCES}/logs":/var/log/ \
     -e ROBOT_THREADS=4 \
     -e TZ=${CONTINENT}/${PLACE} \
     -e CONTINENT=${CONTINENT} \
     -e PLACE=${PLACE} \
-    -e ZIP_REPORT=false  \
-    -e ALLURE_REPORT=false \
-    -e AWS_UPLOAD_TO_S3=false \
-    -e PLAYWRIGHT_SKIP_BROWSER_GC=1 \
-    -e NVM_SYMLINK_CURRENT=true \
-    -e ROBOT_THREADS=1 \
+    -e ZIP_REPORT=${ZIP_REPORT}  \
+    -e ALLURE_REPORT=${ALLURE_REPORT} \
+    -e AWS_UPLOAD_TO_S3=${AWS_UPLOAD_TO_S3} \
+    -e PLAYWRIGHT_SKIP_BROWSER_GC=${PLAYWRIGHT_SKIP_BROWSER_GC} \
+    -e NVM_SYMLINK_CURRENT=${NVM_SYMLINK_CURRENT} \
+    -e ROBOT_THREADS=${ROBOT_THREADS} \
     -e PABOT_OPTIONS="--testlevelsplit --artifactsinsubfolders" \
     -e ROBOT_OPTIONS="--loglevel DEBUG" \
-    -p 8080:8080 \
+    -p ${RF_PORT}:8080 \
     $RF_IMAGE
 fi

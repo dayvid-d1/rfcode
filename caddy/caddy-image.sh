@@ -103,9 +103,9 @@ cd ${CURRENT_DIR}
 CADDY_CONTAINER_RUNNING=''
 CADDY_CONTAINER_STATUS=''
 CADDY_VOLUME_SCOPE=''
-CADDY_CONTAINER_RUNNING=$(docker inspect --format=\"{{.State.Running}}\" ${CADDY_CONTAINER_NAME} 2> /dev/null]) :;
-CADDY_CONTAINER_STATUS=$(docker inspect --format=\"{{.State.Status}}\" ${CADDY_CONTAINER_NAME} 2> /dev/null) :;
-CADDY_VOLUME_SCOPE=$(docker volume inspect --format=\"{{.Scope}}\" ${CADDY_VOLUME_NAME} 2> /dev/null) :;
+CADDY_CONTAINER_RUNNING=$(docker inspect --format=\"{{.State.Running}}\" ${CADDY_CONTAINER_NAME} 2> /dev/null)
+CADDY_CONTAINER_STATUS=$(docker inspect --format=\"{{.State.Status}}\" ${CADDY_CONTAINER_NAME} 2> /dev/null)
+CADDY_VOLUME_SCOPE=$(docker volume inspect --format=\"{{.Scope}}\" ${CADDY_VOLUME_NAME} 2> /dev/null)
 
 echo "$(timestamp) Caddy container $CADDY_CONTAINER_NAME to be set"
 if [ "$CADDY_CONTAINER_RUNNING" = "\"false\"" ] || [ -z "$CADDY_CONTAINER_RUNNING" ]; then   

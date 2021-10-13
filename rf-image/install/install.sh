@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/bash
 
 set -o nounset
 set -o errexit
@@ -53,3 +53,4 @@ rfbrowser init
 
 rm -rf  /tmp/*
 chmod +x /etc/run-tests
+dos2unix /etc/run-tests
