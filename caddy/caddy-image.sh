@@ -1,9 +1,9 @@
-#!/bin/sh
+#!/usr/bin/bash
 
 set -o nounset
 set -o errexit
 
-function usage {
+usage() {
   echo "Usage: ./slims-image.sh [ -h | --help ]"
   echo " -h  | --help                         Show this menu"
 }
@@ -29,7 +29,7 @@ while(($#)) ; do
                                         ;;
     esac
 done
-
+CADDY_IMAGE_ID=""
 CADDY_IMAGE_ID=$(docker image inspect --format=\"{{.Id}}\" ${CADDY_IMAGE} 2> /dev/null) :;
 
 

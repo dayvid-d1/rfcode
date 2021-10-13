@@ -1,11 +1,11 @@
-#!/bin/sh
+#!/usr/bin/bash
 
 set -o nounset
 set -o errexit
 
 mkdir -p workspace
 
-chmod +x . ./caddy/caddy-image.sh
+chmod +x ./caddy/caddy-image.sh
 . ./caddy/caddy-image.sh 
 
 BASE_IMAGE=ubuntu:latest
