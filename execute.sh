@@ -41,7 +41,8 @@ dos2unix ./rf-image/rf-image.sh
     -c ${CONTINENT} \
     -l ${PLACE} \
     -t ${ROBOT_THREADS} \
-    -p ${RF_PORT}
+    -p ${RF_PORT} \
+    -m ${CADDY_USER}
 
 start chrome http://localhost:8181/
 

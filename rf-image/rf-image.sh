@@ -6,7 +6,7 @@ set -o errexit
 function usage {
   echo "Usage: ./slims-image.sh [ -b | --bimage] [ -i | --image] [ -v | --vname] [ -n | --cname] [ -r | --resources]
                                 [ -c | --continent] [ -l | --location] [ -t | --threads] [ -z | --zip] [ -a | --allure]
-                                [ -u | --upload] [ -g | --gc] [ -s | --symlink] [ -p | --port] [ -h | --help ]"
+                                [ -u | --upload] [ -g | --gc] [ -s | --symlink] [ -p | --port] [ -m | --uname] [ -h | --help ]"
   echo " -b  | --bimage                       Base Image f.e. '-b ubuntu:latest'"
   echo " -i  | --image                        RF Image f.e. '-i rf-image:latest'"
   echo " -v  | --vname                        Volumne name f.e. '-v rf-vol'"
@@ -17,10 +17,11 @@ function usage {
   echo " -t  | --threads                      Robot threads f.e. '-t 4'"
   echo " -z  | --zip                          Zip report f.e. '-z true'"
   echo " -a  | --allure                       Allure report f.e. '-a true'"
-  echo " -u  | --upload                       Continent f.e. '-c America'"
+  echo " -u  | --upload                       AWS Upload f.e. '-u true'"
   echo " -g  | --gc                           Playwright skip browser gc f.e. '-g 1'"
   echo " -s  | --symlink                      NVM Symlink Current f.e. '-s true'"
   echo " -p  | --port                         Port f.e. '-p 8080'"  
+  echo " -m  | --uname                        Username f.e. '-m app'"  
   echo " -h  | --help                         Show this menu"
 }
 
@@ -45,6 +46,7 @@ AWS_UPLOAD_TO_S3=''
 PLAYWRIGHT_SKIP_BROWSER_GC=''
 NVM_SYMLINK_CURRENT=''
 RF_PORT=''
+RF_USER=''
 
 
 while(($#)) ; do
@@ -101,6 +103,10 @@ while(($#)) ; do
                                         RF_PORT="$1"
                                         shift
                                         ;;
+        -m | --uname )                  shift
+                                        RF_USER="$1"
+                                        shift
+                                        ;;        
         -r | --resources )              shift
                                         RF_RESOURCES="$1"
                                         shift
@@ -161,18 +167,23 @@ fi
 if [[ ! -n "$RF_PORT" ]]; then
 	RF_PORT=8080
 fi
+if [[ ! -n "$RF_USER" ]]; then
+	echo "$(timestamp) ERROR: Username not provided"
+	exit 1
+fi
 
 RF_IMAGE_ID=""
 RF_IMAGE_ID=$(docker image inspect --format=\"{{.Id}}\" ${RF_IMAGE} 2> /dev/null) :;
 
 
 if [ -z "$RF_IMAGE_ID" ]; then  
-  echo "$(timestamp) Building Base image"
-  # cd "$SCRIPT_DIR"
-  # docker build \
-  # --build-arg RF_BASE_IMAGE=$RF_BASE_IMAGE \
-  # -t $RF_IMAGE .
-  docker pull $RF_IMAGE
+  echo "$(timestamp) Building Base image"  
+  cd "$SCRIPT_DIR"
+  docker build \
+  --build-arg RF_BASE_IMAGE=$RF_BASE_IMAGE \
+  --build-arg RF_USER="${RF_USER}" \
+  -t $RF_IMAGE .
+  #docker pull $RF_IMAGE
   echo "$(timestamp) Base image built successfully"
 fi
 cd ${CURRENT_DIR}
@@ -196,9 +207,10 @@ if [ -z $(docker ps -q -f name=${RF_CONTAINER_NAME}) ]; then
     --detach \
     --name=$RF_CONTAINER_NAME \
     --privileged \
-    -v=$RF_VOLUME_NAME \
-    -v "/${RF_RESOURCES}":/home/app/rfcode/ \
+    -v "/${RF_RESOURCES}/test":/home/app/rfcode/test \
+    -v "/${RF_RESOURCES}/reports":/home/app/rfcode/reports \
     -v "/${RF_RESOURCES}/logs":/var/log/ \
+    -v=$RF_VOLUME_NAME \
     -e ROBOT_THREADS=4 \
     -e TZ=${CONTINENT}/${PLACE} \
     -e CONTINENT=${CONTINENT} \
