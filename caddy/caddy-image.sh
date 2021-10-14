@@ -88,7 +88,7 @@ if [[ ! -n "$CADDY_PORT" ]]; then
 fi
 
 CADDY_IMAGE_ID=""
-CADDY_IMAGE_ID=$(docker image inspect --format=\"{{.Id}}\" ${CADDY_IMAGE} 2> /dev/null) :;
+CADDY_IMAGE_ID=$(docker image inspect --format=\"{{.Id}}\" ${CADDY_IMAGE} 2> /dev/null 2>&1)
 
 
 if [ -z "$CADDY_IMAGE_ID" ]; then  
@@ -100,25 +100,17 @@ if [ -z "$CADDY_IMAGE_ID" ]; then
 fi
 cd ${CURRENT_DIR}
 
-CADDY_CONTAINER_RUNNING=''
-CADDY_CONTAINER_STATUS=''
-CADDY_VOLUME_SCOPE=''
-CADDY_CONTAINER_RUNNING=$(docker inspect --format=\"{{.State.Running}}\" ${CADDY_CONTAINER_NAME} 2> /dev/null)
-CADDY_CONTAINER_STATUS=$(docker inspect --format=\"{{.State.Status}}\" ${CADDY_CONTAINER_NAME} 2> /dev/null)
-CADDY_VOLUME_SCOPE=$(docker volume inspect --format=\"{{.Scope}}\" ${CADDY_VOLUME_NAME} 2> /dev/null)
-
-echo "$(timestamp) Caddy container $CADDY_CONTAINER_NAME to be set"
-if [ "$CADDY_CONTAINER_RUNNING" = "\"false\"" ] || [ -z "$CADDY_CONTAINER_RUNNING" ]; then   
-  if [ "${CADDY_CONTAINER_STATUS}" = "\"exited\"" ] || [ "${CADDY_CONTAINER_STATUS}" = "\"created\"" ]; then
+if [ -z $(docker ps -q -f name=${CADDY_CONTAINER_NAME}) ]; then    
+  if [ "$(docker container inspect -f '{{.State.Status}}' ${CADDY_CONTAINER_NAME})" == "exited" ]; then
     echo "$(timestamp) Removing old caddy container"
-    docker container rm ${CADDY_CONTAINER_NAME}
+    docker container rm ${CADDY_CONTAINER_NAME}      
+    
+    if [ "$(docker volume inspect -f '{{.Scope}}' ${CADDY_VOLUME_NAME})" == "local" ]; then
+      echo "$(timestamp) Removing old caddy volume"
+      docker volume rm $CADDY_VOLUME_NAME
+    fi
   fi  
-
-  if [ "${CADDY_VOLUME_SCOPE}" = "\"local\"" ]; then
-    echo "$(timestamp) Removing old caddy volume"
-    docker volume rm $CADDY_VOLUME_NAME
-  fi
-
+#echo "$(timestamp) Caddy container $CADDY_CONTAINER_NAME to be set"
   echo "$(timestamp) Creating new caddy volume"
   docker volume create $CADDY_VOLUME_NAME
 
@@ -131,4 +123,6 @@ if [ "$CADDY_CONTAINER_RUNNING" = "\"false\"" ] || [ -z "$CADDY_CONTAINER_RUNNIN
     --env=APP_PASSWORD_HASH="${CADDY_SECRET}" \
     --publish=${CADDY_PORT}:8080 \
     $CADDY_IMAGE
+else
+  echo "$(timestamp) Caddy container is already running"
 fi

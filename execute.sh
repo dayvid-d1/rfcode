@@ -4,11 +4,11 @@ set -o nounset
 set -o errexit
 
 #===================================================================================
-# CADDY SETUP
+echo "CADDY SETUP"
 #===================================================================================
 
 CADDY_IMAGE="davidclement/caddy-image:latest"
-CADDY_USER="genohm"
+CADDY_USER="app"
 CADDY_SECRET="JDJhJDEwJDF5U3AuelBxMENaN2o4M1lHWS92cE9iU1QyNjRSWTlCRFJYdmFYT0l3VlRtaXBCcXlGMGRx"
 CADDY_PORT=8129
 
@@ -25,13 +25,14 @@ dos2unix ./caddy/caddy-image.sh
 
 
 #===================================================================================
-#RF-IMAGE SETUP
+echo "RF-IMAGE SETUP"
 #===================================================================================
 
 RF_IMAGE=davidclement/rf-image:latest
 CONTINENT="America"
 PLACE="New_York"
 ROBOT_THREADS=4
+RF_PORT=8181
 
 chmod +x ./rf-image/rf-image.sh
 dos2unix ./rf-image/rf-image.sh
@@ -39,7 +40,10 @@ dos2unix ./rf-image/rf-image.sh
     -i ${RF_IMAGE} \
     -c ${CONTINENT} \
     -l ${PLACE} \
-    -t ${ROBOT_THREADS}
+    -t ${ROBOT_THREADS} \
+    -p ${RF_PORT}
+
+start chrome http://localhost:8181/
 
 
 

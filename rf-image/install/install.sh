@@ -28,7 +28,6 @@ export RUN_TESTS=/home/${USERNAME}/rfcode/run-tests
 export PATH=$PATH:${ROBOT_REPORTS_DIR}:${ROBOT_TESTS_DIR}:${ROBOT_SETUP_DIR}
 export AUTO_BROWSER=chromium
 
-
 mkdir -p ${ROBOT_DIR}
 mkdir -p ${ROBOT_DATA_DIR}
 mkdir -p ${ROBOT_SETUP_DIR}
@@ -40,7 +39,9 @@ echo "$(timestamp) Folder accessibility for user"
 groupadd --gid ${USER_GID} ${USERNAME}
 useradd --home-dir ${ROBOT_DIR} --shell /bin/bash --uid ${USER_UID} --gid ${USER_GID} ${USERNAME}
 chown ${USERNAME}:${USERNAME} ${ROBOT_DIR}
-chmod -R ugo+rwx,g+s ${ROBOT_DIR}
+chown ${USERNAME}:${USERNAME} /dev/stdout
+chown ${USERNAME}:${USERNAME} /var/log
+chmod -R ugo+rwx,g+s ${ROBOT_DIR} /var/log 
 
 echo "$(timestamp) Setup dependencies"
 apt-get update -y
@@ -52,5 +53,5 @@ pip3 install --disable-pip-version-check --no-cache-dir --no-warn-script-locatio
 rfbrowser init
 
 rm -rf  /tmp/*
-chmod +x /etc/run-tests
+chmod -R ugo+rwx,g+s /etc/run-tests
 dos2unix /etc/run-tests

@@ -166,42 +166,37 @@ RF_IMAGE_ID=""
 RF_IMAGE_ID=$(docker image inspect --format=\"{{.Id}}\" ${RF_IMAGE} 2> /dev/null) :;
 
 
-if [ -z "$RF_IMAGE_ID" ]; then
-  cd "$SCRIPT_DIR"
+if [ -z "$RF_IMAGE_ID" ]; then  
   echo "$(timestamp) Building Base image"
-  docker build \
-  --build-arg RF_BASE_IMAGE=$RF_BASE_IMAGE \
-  -t $RF_IMAGE .
+  # cd "$SCRIPT_DIR"
+  # docker build \
+  # --build-arg RF_BASE_IMAGE=$RF_BASE_IMAGE \
+  # -t $RF_IMAGE .
+  docker pull $RF_IMAGE
   echo "$(timestamp) Base image built successfully"
 fi
 cd ${CURRENT_DIR}
 
-RF_CONTAINER_RUNNING=''
-RF_CONTAINER_STATUS=''
-RF_VOLUME_SCOPE=''
 
-RF_CONTAINER_RUNNING=$(docker inspect --format=\"{{.State.Running}}\" ${RF_CONTAINER_NAME} 2> /dev/null)
-RF_CONTAINER_STATUS=$(docker inspect --format=\"{{.State.Status}}\" ${RF_CONTAINER_NAME} 2> /dev/null)
-RF_VOLUME_SCOPE=$(docker volume inspect --format=\"{{.Scope}}\" ${RF_VOLUME_NAME} 2> /dev/null)
-
-echo "$(timestamp) RF container $RF_CONTAINER_NAME to be set"
-if [ "$RF_CONTAINER_RUNNING" = "\"false\"" ] || [ -z "$RF_CONTAINER_RUNNING" ]; then   
-  if [ "${RF_CONTAINER_STATUS}" = "\"exited\"" ] || [ "${RF_CONTAINER_STATUS}" = "\"created\"" ]; then
-    echo "$(timestamp) Removing old rf container"
-    docker container rm ${RF_CONTAINER_NAME}
+if [ -z $(docker ps -q -f name=${RF_CONTAINER_NAME}) ]; then    
+  if [ "$(docker container inspect -f '{{.State.Status}}' ${RF_CONTAINER_NAME})" == "exited" ]; then
+    echo "$(timestamp) Removing old RF container"
+    docker container rm ${RF_CONTAINER_NAME}      
+    if [ "$(docker volume inspect -f '{{.Scope}}' ${RF_VOLUME_NAME})" == "local" ]; then
+      echo "$(timestamp) Removing old RF volume"
+      docker volume rm $RF_VOLUME_NAME
+    fi
   fi  
-
-  if [ "${RF_VOLUME_SCOPE}" = "\"local\"" ]; then
-    echo "$(timestamp) Removing old rf volume"
-    docker volume rm $RF_VOLUME_NAME
-  fi
-
-  echo "$(timestamp) Creating new rf volume"
+#echo "$(timestamp) RF container $RF_CONTAINER_NAME to be set"
+  echo "$(timestamp) Creating new RF volume"
   docker volume create $RF_VOLUME_NAME
-  
-  docker run --rm \
+
+  echo "$(timestamp) Initiating RF container run"
+  docker run \
+    --detach \
     --name=$RF_CONTAINER_NAME \
-    --user=app \
+    --privileged \
+    -v=$RF_VOLUME_NAME \
     -v "/${RF_RESOURCES}":/home/app/rfcode/ \
     -v "/${RF_RESOURCES}/logs":/var/log/ \
     -e ROBOT_THREADS=4 \
@@ -218,4 +213,6 @@ if [ "$RF_CONTAINER_RUNNING" = "\"false\"" ] || [ -z "$RF_CONTAINER_RUNNING" ]; 
     -e ROBOT_OPTIONS="--loglevel DEBUG" \
     -p ${RF_PORT}:8080 \
     $RF_IMAGE
+else
+  echo "$(timestamp) RF container is already running"
 fi

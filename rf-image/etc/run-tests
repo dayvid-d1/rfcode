@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/usr/bin/bash
+
 set -ex
 
 #Robot - Pabot Script
@@ -28,8 +29,7 @@ execute_script(){
 
 export HOME=${ROBOT_DIR}
     
-if [ -z "${ROBOT_TEST_RUN_ID}" ]
-then
+if [ -z "${ROBOT_TEST_RUN_ID}" ]; then
     ROBOT_TEST_RUN_ID=${CONTINENT}_${PLACE}_$(date '+%d-%m-%Y_%H-%M-%S')
     export ROBOT_REPORTS_FINAL_DIR="${ROBOT_REPORTS_DIR}/${ROBOT_TEST_RUN_ID}"
 else
@@ -43,8 +43,7 @@ else
     fi  
 fi
 
-if [ $ALLURE_REPORT = true ]
-then
+if [ $ALLURE_REPORT = true ]; then
     export ROBOT_ALLURE_DIR="${ROBOT_REPORTS_DIR}/allure"
     mkdir -p ${ROBOT_ALLURE_DIR}
     ROBOT_OPTIONS="${ROBOT_OPTIONS} --listener allure_robotframework;${ROBOT_ALLURE_DIR}"
