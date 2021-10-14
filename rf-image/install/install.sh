@@ -19,9 +19,7 @@ export TZ=UTC
 export USERNAME=app
 export DEBIAN_FRONTEND=noninteractive
 export LANG=en_US.UTF-8
-export ROBOT_DIR=/home/${USERNAME}/rfcode
-export ROBOT_DATA_DIR=/home/${USERNAME}/rfcode/data   
-export ROBOT_SETUP_DIR=/home/${USERNAME}/rfcode/setup
+export ROBOT_DIR=/home/${USERNAME}/rfcode 
 export ROBOT_TESTS_DIR=/home/${USERNAME}/rfcode/test
 export ROBOT_REPORTS_DIR=/home/${USERNAME}/rfcode/reports
 export RUN_TESTS=/home/${USERNAME}/rfcode/run-tests
@@ -29,10 +27,6 @@ export PATH=$PATH:${ROBOT_REPORTS_DIR}:${ROBOT_TESTS_DIR}:${ROBOT_SETUP_DIR}
 export AUTO_BROWSER=chromium
 
 mkdir -p ${ROBOT_DIR}
-mkdir -p ${ROBOT_DATA_DIR}
-mkdir -p ${ROBOT_SETUP_DIR}
-mkdir -p ${ROBOT_TESTS_DIR}
-mkdir -p ${ROBOT_REPORTS_DIR}
 mkdir -p /usr/share/desktop-directories
 
 echo "$(timestamp) Folder accessibility for user"

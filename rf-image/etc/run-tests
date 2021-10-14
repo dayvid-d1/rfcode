@@ -6,7 +6,9 @@ set -ex
 execute_script(){
     export AUTO_BROWSER="$1"
     ROBOT_REPORTS_FINAL_DIR="$2"
+    chown app:app /etc/app/rfcode
     mkdir -p ${ROBOT_REPORTS_FINAL_DIR}
+    mkdir -p ${$ROBOT_TESTS_DIR}
     if [ $ROBOT_THREADS -eq 1 ]
     then
         xvfb-run \
