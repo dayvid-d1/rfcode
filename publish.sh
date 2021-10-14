@@ -10,5 +10,5 @@ fi
 git add .
 git commit -m "rfcode-update_n"$UPDATE_ID
 git push origin master
-
-export UPDATE_ID=$(( UPDATE_ID + 1 ))
+UPDATE_ID=$(( UPDATE_ID + 1 ))
+export UPDATE_ID
