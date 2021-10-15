@@ -25,3 +25,11 @@ update-alternatives 2021-10-08 09:53:58: run with --install /usr/bin/x-session-m
 update-alternatives 2021-10-08 09:53:58: link group x-session-manager updated to point to /usr/bin/openbox-session
 update-alternatives 2021-10-08 09:53:59: run with --install /usr/share/icons/default/index.theme x-cursor-theme /usr/share/icons/Adwaita/cursor.theme 90
 update-alternatives 2021-10-08 09:53:59: link group x-cursor-theme updated to point to /usr/share/icons/Adwaita/cursor.theme
+update-alternatives 2021-10-14 17:35:07: run with --install /usr/share/fonts/truetype/fonts-japanese-gothic.ttf fonts-japanese-gothic.ttf /usr/share/fonts/opentype/ipafont-gothic/ipag.ttf 100
+update-alternatives 2021-10-14 17:35:07: link group fonts-japanese-gothic.ttf updated to point to /usr/share/fonts/opentype/ipafont-gothic/ipag.ttf
+update-alternatives 2021-10-14 17:35:34: run with --force --install /usr/share/sounds/sf2/default-GM.sf2 default-GM.sf2 /usr/share/sounds/sf2/TimGM6mb.sf2 20
+update-alternatives 2021-10-14 17:35:34: link group default-GM.sf2 updated to point to /usr/share/sounds/sf2/TimGM6mb.sf2
+update-alternatives 2021-10-14 17:35:34: run with --force --install /usr/share/sounds/sf3/default-GM.sf3 default-GM.sf3 /usr/share/sounds/sf2/TimGM6mb.sf2 20
+update-alternatives 2021-10-14 17:35:34: link group default-GM.sf3 updated to point to /usr/share/sounds/sf2/TimGM6mb.sf2
+update-alternatives 2021-10-14 17:35:52: run with --install /usr/share/icons/default/index.theme x-cursor-theme /usr/share/icons/Adwaita/cursor.theme 90
+update-alternatives 2021-10-14 17:35:52: link group x-cursor-theme updated to point to /usr/share/icons/Adwaita/cursor.theme

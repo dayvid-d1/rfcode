@@ -136,7 +136,12 @@ if [[ ! -n "$RF_VOLUME_NAME" ]]; then
 	RF_VOLUME_NAME="rf-volume"
 fi
 if [[ ! -n "$RF_RESOURCES" ]]; then
-	RF_RESOURCES="$(dirname "$PWD")/workspace"
+	RF_RESOURCES="$(dirname "$PWD")/rfcode/workspace"
+  mkdir -p "$RF_RESOURCES/reports"
+  mkdir -p "$RF_RESOURCES/test"
+  mkdir -p "$RF_RESOURCES/logs"
+  mkdir -p "$RF_RESOURCES/setup"
+  mkdir -p "$RF_RESOURCES/data"
 fi
 if [[ ! -n "$CONTINENT" ]]; then
 	echo "$(timestamp) ERROR: Continent not provided"
@@ -203,7 +208,7 @@ if [ -z $(docker ps -q -f name=${RF_CONTAINER_NAME}) ]; then
   docker volume create $RF_VOLUME_NAME
 
   echo "$(timestamp) Initiating RF container run"
-  docker run \
+  docker run --rm\
     --detach \
     --name=$RF_CONTAINER_NAME \
     --privileged \
