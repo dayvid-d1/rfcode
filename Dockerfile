@@ -5,7 +5,7 @@ COPY /bin/novnc.sh /etc/
 RUN . /etc/novnc.sh; \
     rm /etc/novnc.sh
 
-FROM node:latest
+FROM ubuntu:latest
 
 ARG RF_USER
 ENV USER_UID=1000 \
