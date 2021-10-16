@@ -64,7 +64,7 @@ jobs:
           builder: ${{ steps.buildx_github.outputs.name }}
           push: ${{ github.event_name != 'pull_request' }}
           tags:  ${{ env.GITHUB_REG }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.TEST_VERSION }}
-          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-from: type=locagit l,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
       
       - name: Image digest
