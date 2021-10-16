@@ -211,9 +211,10 @@ if [ -z $(docker ps -q -f name=${RF_CONTAINER_NAME}) ]; then
   docker volume create $RF_VOLUME_NAME
 
   echo "$(timestamp) Initiating RF container run"
-  docker run --rm  -it\
+  docker run \
     --name=$RF_CONTAINER_NAME \
     --privileged \
+    --detach \
     -v "/${RF_RESOURCES}/test":/home/app/rfcode/test \
     -v "/${RF_RESOURCES}/reports":/home/app/rfcode/reports \
     -v "/${RF_RESOURCES}/setup":/home/app/rfcode/setup \
