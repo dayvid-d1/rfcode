@@ -18,3 +18,4 @@ menu
 dos2unix
 build-essential
 git
+software-properties-common

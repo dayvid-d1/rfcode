@@ -30,11 +30,17 @@ ENV USER_UID=1000 \
 COPY --from=easy-novnc-build /bin/easy-novnc /usr/local/bin/
 COPY /etc /etc/
 
-RUN apt update; \
-    apt install software-properties-common -y; \
+RUN apt-get update -y; \
     add-apt-repository ppa:deadsnakes/ppa; \
     xargs apt-get install -y --no-install-recommends </etc/package-list; \      
+    curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -; \
+    apt-get install nodejs -y; \
+    curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash; \
+    source ~/.profile; \
+    nvm install node; \
+    npm install -g yarn; \
     pip3 install --disable-pip-version-check --no-cache-dir --no-warn-script-location -r /etc/requirements.txt 
+
 COPY /bin/menu.xml /etc/xdg/openbox/
 
 COPY /install /tmp/
