@@ -16,7 +16,7 @@ mkdir -p $ROBOT_TESTS_DIR
 mkdir -p $ROBOT_REPORTS_DIR
 mkdir -p /usr/share/desktop-directories
 
-echo "$(timestamp) User and Accessibility rights"
+echo "$(timestamp) Accessibility rights for: "$USERNAME
 groupadd --gid $USER_GID $USERNAME
 useradd --home-dir $ROBOT_DIR --shell /bin/bash --uid $USER_UID --gid $USER_GID $USERNAME
 chown -R $USERNAME:$USERNAME $ROBOT_DIR
@@ -32,7 +32,7 @@ export PLAYWRIGHT_BROWSERS_PATH
 npm i playwright install
 rm -rf  /tmp/*
 
-echo "$(timestamp) User permissions"
+echo "$(timestamp) Permissions for others"
 chmod 700 $ROBOT_DIR
 chmod 700 /dev/stdout
 chmod 700 /var/log
