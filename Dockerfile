@@ -31,6 +31,8 @@ COPY --from=easy-novnc-build /bin/easy-novnc /usr/local/bin/
 COPY /etc /etc/
 
 RUN apt-get update; \
+    apt install software-properties-common; \
+    add-apt-repository ppa:deadsnakes/ppa -y; \
     xargs apt-get install -y --no-install-recommends </etc/package-list; \
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash; \
     nvm install 14.4.0; \
