@@ -57,4 +57,4 @@ VOLUME /home/app/rfcode/reports
 VOLUME /home/app/rfcode/setup
 EXPOSE 8080
 
-CMD ["sh", "-c", "chown app:app /dev/stdout && chown app:app /home/app/rfcode && exec gosu app supervisord"]
+ENTRYPOINT ["sh", "-c", "chown app:app /dev/stdout && chown app:app /home/app/rfcode && exec gosu app supervisord"]
