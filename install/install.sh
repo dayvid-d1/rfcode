@@ -34,7 +34,5 @@ echo "$(timestamp) rfbrowser initialization"
 npm i -g acorn-import-assertions
 rfbrowser init --skip-browsers
 echo "$(timestamp) Installing Playwright"
-PLAYWRIGHT_BROWSERS_PATH=$ROBOT_BROWSER_DIR 
-export PLAYWRIGHT_BROWSERS_PATH
-npm i -g playwright
+PLAYWRIGHT_BROWSERS_PATH=$ROBOT_BROWSER_DIR npx playwright install
 rm -rf  /tmp/*
