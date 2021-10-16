@@ -4,11 +4,10 @@ set -o nounset
 set -o errexit
 
 function usage {
-  echo "Usage: ./slims-image.sh [ -b | --bimage] [ -i | --image] [ -v | --vname] [ -n | --cname] [ -r | --resources]
+  echo "Usage: ./slims-image.sh [ -i | --image] [ -v | --vname] [ -n | --cname] [ -r | --resources]
                                 [ -c | --continent] [ -l | --location] [ -t | --threads] [ -z | --zip] [ -a | --allure]
                                 [ -u | --upload] [ -g | --gc] [ -s | --symlink] [ -p | --port]
                                 [ -o | --cbrowser] [ -w | --abrowser] [ -m | --uname] [ -h | --help ]"
-  echo " -b  | --bimage                       Base Image f.e. '-b ubuntu:latest'"
   echo " -i  | --image                        RF Image f.e. '-i rf-image:latest'"
   echo " -v  | --vname                        Volumne name f.e. '-v rf-vol'"
   echo " -n  | --cname                        Container name f.e. '-n rf-app'"
@@ -34,7 +33,6 @@ timestamp() {
 	date +"%Y-%m-%d %T"
 }
 
-RF_BASE_IMAGE=''
 RF_IMAGE=''
 RF_CONTAINER_NAME=''
 RF_VOLUME_NAME=''
@@ -56,10 +54,6 @@ AUTO_BROWSER=''
 
 while(($#)) ; do
     case $1 in
-        -b | --bmage )                  shift
-                                        RF_BASE_IMAGE="$1"
-                                        shift
-                                        ;;
         -i | --image )                 shift
                                         RF_IMAGE="$1"
                                         shift
@@ -135,9 +129,6 @@ while(($#)) ; do
     esac
 done
 
-if [[ ! -n "$RF_BASE_IMAGE" ]]; then
-  RF_BASE_IMAGE=ubuntu:latest
-fi
 if [[ ! -n "$RF_IMAGE" ]]; then
 	echo "$(timestamp) ERROR: RF image name not provided"
 	exit 1
@@ -202,7 +193,6 @@ if [ -z "$RF_IMAGE_ID" ]; then
   echo "$(timestamp) Building Base image"  
   cd "$SCRIPT_DIR"
   docker build \
-  --build-arg RF_BASE_IMAGE=$RF_BASE_IMAGE \
   --build-arg RF_USER="${RF_USER}" \
   -t $RF_IMAGE .
   #docker pull $RF_IMAGE

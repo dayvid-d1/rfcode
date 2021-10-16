@@ -143,6 +143,7 @@ jobs:
         with:
           context: ./rf-image/
           file: ./rf-image/Dockerfile
+          build-args: RF_USER=${{ env.TEST_USER }}
           builder: ${{ steps.buildx_docker.outputs.name }}
           push: ${{ github.event_name != 'pull_request' }}
           tags:  ${{ env.DOCKER_REG }}/${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}

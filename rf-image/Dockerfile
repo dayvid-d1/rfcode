@@ -1,12 +1,11 @@
-ARG RF_BASE_IMAGE
-FROM golang:1.14-buster AS easy-novnc-build
+FROM golang:1.17.2-buster AS easy-novnc-build
 WORKDIR /src
 
 COPY /bin/novnc.sh /etc/
 RUN . /etc/novnc.sh; \
     rm /etc/novnc.sh
 
-FROM ${RF_BASE_IMAGE}
+FROM ubuntu:latest
 
 ARG RF_USER
 ENV USER_UID=1000 \
