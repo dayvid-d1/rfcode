@@ -33,9 +33,9 @@ npm i playwright install
 rm -rf  /tmp/*
 
 echo "$(timestamp) Permissions for others"
-chmod 700 $ROBOT_DIR
-chmod 700 /dev/stdout
-chmod 700 /var/log
-chmod 755 /etc/run-tests
+# chmod 700 $ROBOT_DIR
+# chmod 700 /dev/stdout
+# chmod 700 /var/log
+# chmod 755 /etc/run-tests
 
 dos2unix /etc/run-tests

@@ -181,16 +181,15 @@ if [[ ! -n "$RF_USER" ]]; then
 fi
 
 if [ -z $(docker image inspect --format=\"{{.Id}}\" ${RF_IMAGE}) ]; then  
-  echo "$(timestamp) Building Base image"  
-  docker pull $RF_IMAGE
-  echo "$(timestamp) Base image built successfully"
+  echo "$(timestamp) Stopping container"  
+  docker container stop ${RF_CONTAINER_NAME}  
 fi
 cd ${CURRENT_DIR}
 
 if [ -z $(docker ps -q -f name=${RF_CONTAINER_NAME}) ]; then    
   if [ "$(docker container inspect -f '{{.State.Status}}' ${RF_CONTAINER_NAME})" == "exited" ]; then
     echo "$(timestamp) Removing old RF container"
-    docker container rm ${RF_CONTAINER_NAME}      
+    docker container rm ${RF_CONTAINER_NAME}
     if [ "$(docker volume inspect -f '{{.Scope}}' ${RF_VOLUME_NAME})" == "local" ]; then
       echo "$(timestamp) Removing old RF volume"
       docker volume rm $RF_VOLUME_NAME
@@ -206,6 +205,9 @@ if [ -z $(docker ps -q -f name=${RF_CONTAINER_NAME}) ]; then
   mkdir -p "$RF_RESOURCES/logs"
   mkdir -p "$RF_RESOURCES/setup"
   mkdir -p "$RF_RESOURCES/data"
+
+  echo "$(timestamp) Pulling latest image"
+  docker pull $RF_IMAGE  
 
   echo "$(timestamp) Initiating RF container run"
   docker run \
