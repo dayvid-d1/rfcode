@@ -232,7 +232,7 @@ if [ -z $(docker ps -q -f name=${RF_CONTAINER_NAME}) ]; then
     -e PABOT_OPTIONS="--testlevelsplit --artifactsinsubfolders" \
     -e ROBOT_OPTIONS="--loglevel DEBUG" \
     -e CROSS_BROWSER=${CROSS_BROWSER} \
-    -e AUTO_BROWSER=${AUTO_BROWSER}
+    -e AUTO_BROWSER=${AUTO_BROWSER} \
     -p ${RF_PORT}:8080 \
     $RF_IMAGE
 else
