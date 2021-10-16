@@ -45,7 +45,7 @@ COPY /bin/menu.xml /etc/xdg/openbox/
 
 COPY /install /tmp/
 RUN dos2unix /tmp/install.sh; \
-    . /tmp/install.sh
+    /tmp/install.sh
 
 WORKDIR /home/app/rfcode
 VOLUME /var/log 

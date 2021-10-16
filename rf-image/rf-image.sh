@@ -191,11 +191,7 @@ RF_IMAGE_ID=$(docker image inspect --format=\"{{.Id}}\" ${RF_IMAGE} 2> /dev/null
 
 if [ -z "$RF_IMAGE_ID" ]; then  
   echo "$(timestamp) Building Base image"  
-  cd "$SCRIPT_DIR"
-  docker build \
-  --build-arg RF_USER="${RF_USER}" \
-  -t $RF_IMAGE .
-  #docker pull $RF_IMAGE
+  docker pull $RF_IMAGE
   echo "$(timestamp) Base image built successfully"
 fi
 cd ${CURRENT_DIR}
