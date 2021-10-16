@@ -43,6 +43,8 @@ RUN dos2unix /tmp/install.sh; \
     #rm -rf /var/lib/apt/lists /var/cache/apt/*.bin; \
     #apt-get clean; \
 
+ENV PLAYWRIGHT_BROWSERS_PATH="$ROBOT_BROWSER_DIR npm i -D playwright"
+
 WORKDIR /home/app/rfcode
 VOLUME /var/log 
 VOLUME /home/app/rfcode/test
