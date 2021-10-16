@@ -36,5 +36,5 @@ rfbrowser init --skip-browsers
 echo "$(timestamp) Installing Playwright"
 PLAYWRIGHT_BROWSERS_PATH=$ROBOT_BROWSER_DIR 
 export PLAYWRIGHT_BROWSERS_PATH
-npx playwright install
+npm i -g playwright
 rm -rf  /tmp/*
