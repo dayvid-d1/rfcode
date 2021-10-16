@@ -1,6 +1,11 @@
 name: Publish Image
 
 on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'User'
+        required: true
   schedule:
     - cron: '33 11 * * *'
   push:
