@@ -37,6 +37,9 @@ RUN apt-get update -y; \
     apt-get install nodejs -y; \
     curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash; \
     source ~/.profile; \
+    export NVM_DIR="$HOME/.nvm"; \
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"; \ 
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"; \
     nvm install node; \
     npm install -g yarn; \
     pip3 install --disable-pip-version-check --no-cache-dir --no-warn-script-location -r /etc/requirements.txt 
