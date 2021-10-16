@@ -23,6 +23,13 @@ chown -R $USERNAME:$USERNAME $ROBOT_DIR
 chown -R $USERNAME:$USERNAME /dev/stdout
 chown -R $USERNAME:$USERNAME /var/log
 
+echo "$(timestamp) Permissions for others"
+chmod -R 700 $ROBOT_DIR
+chmod -R 700 /dev/stdout
+chmod -R 700 /var/log
+chmod 755 /etc/run-tests
+dos2unix /etc/run-tests
+
 echo "$(timestamp) rfbrowser initialization"
 npm i acorn-import-assertions
 rfbrowser init --skip-browsers
@@ -31,11 +38,3 @@ PLAYWRIGHT_BROWSERS_PATH=$ROBOT_BROWSER_DIR
 export PLAYWRIGHT_BROWSERS_PATH
 npm i playwright install
 rm -rf  /tmp/*
-
-echo "$(timestamp) Permissions for others"
-# chmod 700 $ROBOT_DIR
-# chmod 700 /dev/stdout
-# chmod 700 /var/log
-# chmod 755 /etc/run-tests
-
-dos2unix /etc/run-tests
