@@ -180,61 +180,57 @@ if [[ ! -n "$RF_USER" ]]; then
 	exit 1
 fi
 
-if [ -z $(docker image inspect --format=\"{{.Id}}\" ${RF_IMAGE}) ]; then  
-  echo "$(timestamp) Stopping container"  
-  docker container stop ${RF_CONTAINER_NAME}  
+if [ ! -z $(docker ps -q -f name=${RF_CONTAINER_NAME}) ]; then    
+  docker container stop ${RF_CONTAINER_NAME}
 fi
-cd ${CURRENT_DIR}
 
-if [ -z $(docker ps -q -f name=${RF_CONTAINER_NAME}) ]; then    
-  if [ "$(docker container inspect -f '{{.State.Status}}' ${RF_CONTAINER_NAME})" == "exited" ]; then
-    echo "$(timestamp) Removing old RF container"
-    docker container rm ${RF_CONTAINER_NAME}
-    if [ "$(docker volume inspect -f '{{.Scope}}' ${RF_VOLUME_NAME})" == "local" ]; then
-      echo "$(timestamp) Removing old RF volume"
-      docker volume rm $RF_VOLUME_NAME
-    fi
-  fi  
-#echo "$(timestamp) RF container $RF_CONTAINER_NAME to be set"
-  echo "$(timestamp) Creating new RF volume"
-  docker volume create $RF_VOLUME_NAME
+if [ "$(docker container inspect -f '{{.State.Status}}' ${RF_CONTAINER_NAME})" == "exited" ]; then
+  echo "$(timestamp) Removing old caddy container"
+  docker container rm ${RF_CONTAINER_NAME}      
+    
+  if [ "$(docker volume inspect -f '{{.Scope}}' ${RF_VOLUME_NAME})" == "local" ]; then
+    echo "$(timestamp) Removing old caddy volume"
+    docker volume rm $RF_VOLUME_NAME
+  fi
+fi  
 
-  echo "$(timestamp) Ensuring RF Directories"
-  mkdir -p "$RF_RESOURCES/reports"
-  mkdir -p "$RF_RESOURCES/test"
-  mkdir -p "$RF_RESOURCES/logs"
-  mkdir -p "$RF_RESOURCES/setup"
-  mkdir -p "$RF_RESOURCES/data"
+echo "$(timestamp) Pulling latest image"
+docker pull $RF_IMAGE  
 
-  echo "$(timestamp) Pulling latest image"
-  docker pull $RF_IMAGE  
+echo "$(timestamp) Creating new RF volume"
+docker volume create $RF_VOLUME_NAME
 
-  echo "$(timestamp) Initiating RF container run"
-  docker run \
-    --name=$RF_CONTAINER_NAME \
-    --privileged \
-    --detach \
-    -v "/${RF_RESOURCES}/test":/home/app/rfcode/test \
-    -v "/${RF_RESOURCES}/reports":/home/app/rfcode/reports \
-    -v "/${RF_RESOURCES}/setup":/home/app/rfcode/setup \
-    -v "/${RF_RESOURCES}/logs":/var/log/ \
-    -v=$RF_VOLUME_NAME \
-    -e ROBOT_THREADS=4 \
-    -e TZ=${CONTINENT}/${PLACE} \
-    -e CONTINENT=${CONTINENT} \
-    -e PLACE=${PLACE} \
-    -e ZIP_REPORT=${ZIP_REPORT}  \
-    -e ALLURE_REPORT=${ALLURE_REPORT} \
-    -e AWS_UPLOAD_TO_S3=${AWS_UPLOAD_TO_S3} \
-    -e PLAYWRIGHT_SKIP_BROWSER_GC=${PLAYWRIGHT_SKIP_BROWSER_GC} \
-    -e NVM_SYMLINK_CURRENT=${NVM_SYMLINK_CURRENT} \
-    -e ROBOT_THREADS=${ROBOT_THREADS} \
-    -e PABOT_OPTIONS="--testlevelsplit --artifactsinsubfolders" \
-    -e ROBOT_OPTIONS="--loglevel DEBUG" \
-    -e CROSS_BROWSER=${CROSS_BROWSER} \
-    -e AUTO_BROWSER=${AUTO_BROWSER} \
-    -p ${RF_PORT}:8080 \
-    $RF_IMAGE
-else
-  echo "$(timestamp) RF container is already running"
-fi
+echo "$(timestamp) Ensuring RF Directories"
+mkdir -p "$RF_RESOURCES/reports"
+mkdir -p "$RF_RESOURCES/test"
+mkdir -p "$RF_RESOURCES/logs"
+mkdir -p "$RF_RESOURCES/setup"
+mkdir -p "$RF_RESOURCES/data"
+
+
+echo "$(timestamp) Initiating RF container run"
+docker run \
+  --name=$RF_CONTAINER_NAME \
+  --privileged \
+  --detach \
+  -v "/${RF_RESOURCES}/test":/home/app/rfcode/test \
+  -v "/${RF_RESOURCES}/reports":/home/app/rfcode/reports \
+  -v "/${RF_RESOURCES}/setup":/home/app/rfcode/setup \
+  -v "/${RF_RESOURCES}/logs":/var/log/ \
+  -v=$RF_VOLUME_NAME \
+  -e ROBOT_THREADS=4 \
+  -e TZ=${CONTINENT}/${PLACE} \
+  -e CONTINENT=${CONTINENT} \
+  -e PLACE=${PLACE} \
+  -e ZIP_REPORT=${ZIP_REPORT}  \
+  -e ALLURE_REPORT=${ALLURE_REPORT} \
+  -e AWS_UPLOAD_TO_S3=${AWS_UPLOAD_TO_S3} \
+  -e PLAYWRIGHT_SKIP_BROWSER_GC=${PLAYWRIGHT_SKIP_BROWSER_GC} \
+  -e NVM_SYMLINK_CURRENT=${NVM_SYMLINK_CURRENT} \
+  -e ROBOT_THREADS=${ROBOT_THREADS} \
+  -e PABOT_OPTIONS="--testlevelsplit --artifactsinsubfolders" \
+  -e ROBOT_OPTIONS="--loglevel DEBUG" \
+  -e CROSS_BROWSER=${CROSS_BROWSER} \
+  -e AUTO_BROWSER=${AUTO_BROWSER} \
+  -p ${RF_PORT}:8080 \
+  $RF_IMAGE
