@@ -60,7 +60,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./rf-image/
-          file: ./Dockerfile
+          file: ./rf-image/Dockerfile
           builder: ${{ steps.buildx_github.outputs.name }}
           push: ${{ github.event_name != 'pull_request' }}
           tags:  ${{ env.GITHUB_REG }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.TEST_VERSION }}
@@ -141,8 +141,8 @@ jobs:
         id: docker_build_docker
         uses: docker/build-push-action@v2
         with:
-          context: ./
-          file: ./Dockerfile
+          context: ./rf-image/
+          file: ./rf-image/Dockerfile
           builder: ${{ steps.buildx_docker.outputs.name }}
           push: ${{ github.event_name != 'pull_request' }}
           tags:  ${{ env.DOCKER_REG }}/${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
