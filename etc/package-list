@@ -16,3 +16,5 @@ python3-setuptools
 openbox
 menu
 dos2unix
+build-essential
+git

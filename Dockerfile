@@ -5,7 +5,7 @@ COPY /bin/novnc.sh /etc/
 RUN . /etc/novnc.sh; \
     rm /etc/novnc.sh
 
-FROM ubuntu:latest
+FROM node:latest
 
 ARG RF_USER
 ENV USER_UID=1000 \
@@ -31,16 +31,7 @@ COPY --from=easy-novnc-build /bin/easy-novnc /usr/local/bin/
 COPY /etc /etc/
 
 RUN apt-get update; \
-    apt install software-properties-common; \
-    add-apt-repository ppa:deadsnakes/ppa -y; \
-    xargs apt-get install -y --no-install-recommends </etc/package-list; \
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash; \
-    nvm install node; \
-    curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -; \
-    apt-get install -y nodejs; \   
-    apt install build-essential -y; \
-    rm -rf /var/lib/apt/lists /var/cache/apt/*.bin; \
-    apt-get clean; \
+    xargs apt-get install -y --no-install-recommends </etc/package-list; \      
     pip3 install --disable-pip-version-check --no-cache-dir --no-warn-script-location -r /etc/requirements.txt 
 COPY /bin/menu.xml /etc/xdg/openbox/
 
@@ -48,6 +39,8 @@ COPY /install /tmp/
 RUN dos2unix /tmp/install.sh; \
     chmod +x /tmp/install.sh; \
     /tmp/install.sh
+    #rm -rf /var/lib/apt/lists /var/cache/apt/*.bin; \
+    #apt-get clean; \
 
 WORKDIR /home/app/rfcode
 VOLUME /var/log 
