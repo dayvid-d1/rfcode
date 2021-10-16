@@ -5,7 +5,7 @@ COPY /bin/novnc.sh /etc/
 RUN . /etc/novnc.sh; \
     rm /etc/novnc.sh
 
-FROM ubuntu:latest
+FROM ubuntu:20.04
 
 ARG RF_USER
 ENV USER_UID=1000 \
@@ -31,17 +31,7 @@ COPY --from=easy-novnc-build /bin/easy-novnc /usr/local/bin/
 COPY /etc /etc/
 
 RUN apt-get update -y; \
-    add-apt-repository ppa:deadsnakes/ppa; \
-    xargs apt-get install -y --no-install-recommends </etc/package-list; \      
-    curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -; \
-    apt-get install nodejs -y; \
-    curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash; \
-    source ~/.profile; \
-    export NVM_DIR="$HOME/.nvm"; \
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"; \ 
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"; \
-    nvm install node; \
-    npm install -g yarn; \
+    xargs apt-get install -y --no-install-recommends </etc/package-list; \
     pip3 install --disable-pip-version-check --no-cache-dir --no-warn-script-location -r /etc/requirements.txt 
 
 COPY /bin/menu.xml /etc/xdg/openbox/
