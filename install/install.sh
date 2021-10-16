@@ -24,10 +24,10 @@ chown -R $USERNAME:$USERNAME /dev/stdout
 chown -R $USERNAME:$USERNAME /var/log
 
 echo "$(timestamp) Permissions for others"
-chmod -R 700 $ROBOT_DIR
-chmod -R 700 /dev/stdout
-chmod -R 700 /var/log
-chmod 755 /etc/run-tests
+chmod -R 777 $ROBOT_DIR
+chmod -R 777 /dev/stdout
+chmod -R 777 /var/log
+chmod 777 /etc/run-tests
 dos2unix /etc/run-tests
 
 echo "$(timestamp) rfbrowser initialization"
@@ -35,5 +35,5 @@ npm i -g acorn-import-assertions
 rfbrowser init --skip-browsers
 echo "$(timestamp) Installing Playwright"
 PLAYWRIGHT_BROWSERS_PATH="$ROBOT_BROWSER_DIR npm i -D playwright"
-export PLAYWRIGHT_BROWSERS_PATH="$ROBOT_BROWSER_DIR npm i -D playwright"
+export PLAYWRIGHT_BROWSERS_PATH
 rm -rf  /tmp/*

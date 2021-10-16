@@ -25,7 +25,8 @@ ENV USER_UID=1000 \
     ROBOT_REPORTS_DIR=/home/${RF_USER}/rfcode/reports \
     RUN_TESTS=/home/${RF_USER}/rfcode/run-tests \
     PATH=$PATH:${ROBOT_REPORTS_DIR}:${ROBOT_TESTS_DIR}:${ROBOT_SETUP_DIR} \
-    AUTO_BROWSER=chromium
+    AUTO_BROWSER=chromium \
+    PLAYWRIGHT_BROWSERS_PATH=''
 
 COPY --from=easy-novnc-build /bin/easy-novnc /usr/local/bin/
 COPY /etc /etc/
@@ -43,7 +44,7 @@ RUN dos2unix /tmp/install.sh; \
     #rm -rf /var/lib/apt/lists /var/cache/apt/*.bin; \
     #apt-get clean; \
 
-ENV PLAYWRIGHT_BROWSERS_PATH="$ROBOT_BROWSER_DIR npm i -D playwright"
+
 
 WORKDIR /home/app/rfcode
 VOLUME /var/log 
