@@ -15,18 +15,23 @@ mkdir -p $ROBOT_TESTS_DIR
 mkdir -p $ROBOT_REPORTS_DIR
 mkdir -p /usr/share/desktop-directories
 
-echo "$(timestamp) Folder accessibility for user"
+echo "$(timestamp) User and Accessibility rights"
 groupadd --gid $USER_GID $USERNAME
 useradd --home-dir $ROBOT_DIR --shell /bin/bash --uid $USER_UID --gid $USER_GID $USERNAME
 chown -R $USERNAME:$USERNAME $ROBOT_DIR
 chown -R $USERNAME:$USERNAME /dev/stdout
 chown -R $USERNAME:$USERNAME /var/log
 
-rfbrowser init
-#PLAYWRIGHT_BROWSERS_PATH=$ROBOT_BROWSER_DIR npx playwright install
-#npx playwright install-deps
+echo "$(timestamp) rfbrowser initialization"
+npm i acorn-import-assertions
+rfbrowser init --skip-browsers
+echo "$(timestamp) Installing Playwright"
+PLAYWRIGHT_BROWSERS_PATH=$ROBOT_BROWSER_DIR 
+export PLAYWRIGHT_BROWSERS_PATH
+npm i playwright install
 rm -rf  /tmp/*
 
+echo "$(timestamp) User permissions"
 chmod 700 $ROBOT_DIR
 chmod 700 /dev/stdout
 chmod 700 /var/log

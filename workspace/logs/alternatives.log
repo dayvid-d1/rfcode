@@ -33,3 +33,5 @@ update-alternatives 2021-10-14 17:35:34: run with --force --install /usr/share/s
 update-alternatives 2021-10-14 17:35:34: link group default-GM.sf3 updated to point to /usr/share/sounds/sf2/TimGM6mb.sf2
 update-alternatives 2021-10-14 17:35:52: run with --install /usr/share/icons/default/index.theme x-cursor-theme /usr/share/icons/Adwaita/cursor.theme 90
 update-alternatives 2021-10-14 17:35:52: link group x-cursor-theme updated to point to /usr/share/icons/Adwaita/cursor.theme
+update-alternatives 2021-10-15 11:01:28: run with --quiet --install /usr/bin/pinentry pinentry /usr/bin/pinentry-curses 50 --slave /usr/share/man/man1/pinentry.1.gz pinentry.1.gz /usr/share/man/man1/pinentry-curses.1.gz
+update-alternatives 2021-10-15 11:01:28: link group pinentry updated to point to /usr/bin/pinentry-curses

@@ -6,7 +6,8 @@ set -o errexit
 function usage {
   echo "Usage: ./slims-image.sh [ -b | --bimage] [ -i | --image] [ -v | --vname] [ -n | --cname] [ -r | --resources]
                                 [ -c | --continent] [ -l | --location] [ -t | --threads] [ -z | --zip] [ -a | --allure]
-                                [ -u | --upload] [ -g | --gc] [ -s | --symlink] [ -p | --port] [ -m | --uname] [ -h | --help ]"
+                                [ -u | --upload] [ -g | --gc] [ -s | --symlink] [ -p | --port]
+                                [ -o | --cbrowser] [ -w | --abrowser] [ -m | --uname] [ -h | --help ]"
   echo " -b  | --bimage                       Base Image f.e. '-b ubuntu:latest'"
   echo " -i  | --image                        RF Image f.e. '-i rf-image:latest'"
   echo " -v  | --vname                        Volumne name f.e. '-v rf-vol'"
@@ -22,6 +23,8 @@ function usage {
   echo " -s  | --symlink                      NVM Symlink Current f.e. '-s true'"
   echo " -p  | --port                         Port f.e. '-p 8080'"  
   echo " -m  | --uname                        Username f.e. '-m app'"  
+  echo " -o  | --cbrowser                     Cross Browser f.e. '-o false'" 
+  echo " -w  | --abrowser                     Auto Browser f.e. '-a chromium'" 
   echo " -h  | --help                         Show this menu"
 }
 
@@ -48,6 +51,8 @@ NVM_SYMLINK_CURRENT=''
 RF_PORT=''
 RF_USER=''
 
+CROSS_BROWSER=''
+AUTO_BROWSER=''
 
 while(($#)) ; do
     case $1 in
@@ -110,6 +115,14 @@ while(($#)) ; do
         -r | --resources )              shift
                                         RF_RESOURCES="$1"
                                         shift
+                                        ;;                                                
+        -o | --cbrowser )               shift
+                                        CROSS_BROWSER="$1"
+                                        shift
+                                        ;;                                                
+        -w | --abrowser )               shift
+                                        AUTO_BROWSER="$1"
+                                        shift
                                         ;;
         -h | --help )                   shift
                                         usage
@@ -144,18 +157,22 @@ if [[ ! -n "$RF_RESOURCES" ]]; then
   mkdir -p "$RF_RESOURCES/data"
 fi
 if [[ ! -n "$CONTINENT" ]]; then
-	echo "$(timestamp) ERROR: Continent not provided"
-	exit 1
+	CONTINENT="America"
 fi
 if [[ ! -n "$PLACE" ]]; then
-	echo "$(timestamp) ERROR: Location not provided"
-	exit 1
+	PLACE="New_York"
 fi
 if [[ ! -n "$ROBOT_THREADS" ]]; then
 	ROBOT_THREADS=1
 fi
 if [[ ! -n "$ZIP_REPORT" ]]; then
 	ZIP_REPORT=false
+fi
+if [[ ! -n "$CROSS_BROWSER" ]]; then
+	CROSS_BROWSER=false
+fi
+if [[ ! -n "$AUTO_BROWSER" ]]; then
+	AUTO_BROWSER="chromium"
 fi
 if [[ ! -n "$ALLURE_REPORT" ]]; then
 	ALLURE_REPORT=false
@@ -208,12 +225,12 @@ if [ -z $(docker ps -q -f name=${RF_CONTAINER_NAME}) ]; then
   docker volume create $RF_VOLUME_NAME
 
   echo "$(timestamp) Initiating RF container run"
-  docker run --rm\
-    --detach \
+  docker run --rm  -it\
     --name=$RF_CONTAINER_NAME \
     --privileged \
     -v "/${RF_RESOURCES}/test":/home/app/rfcode/test \
     -v "/${RF_RESOURCES}/reports":/home/app/rfcode/reports \
+    -v "/${RF_RESOURCES}/setup":/home/app/rfcode/setup \
     -v "/${RF_RESOURCES}/logs":/var/log/ \
     -v=$RF_VOLUME_NAME \
     -e ROBOT_THREADS=4 \
@@ -228,6 +245,8 @@ if [ -z $(docker ps -q -f name=${RF_CONTAINER_NAME}) ]; then
     -e ROBOT_THREADS=${ROBOT_THREADS} \
     -e PABOT_OPTIONS="--testlevelsplit --artifactsinsubfolders" \
     -e ROBOT_OPTIONS="--loglevel DEBUG" \
+    -e CROSS_BROWSER=${CROSS_BROWSER} \
+    -e AUTO_BROWSER=${AUTO_BROWSER}
     -p ${RF_PORT}:8080 \
     $RF_IMAGE
 else

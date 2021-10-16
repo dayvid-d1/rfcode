@@ -3,8 +3,8 @@ allure
 sudo
 xvfb
 wget
-nodejs
-npm
+curl
+vim
 tigervnc-standalone-server
 supervisor
 gosu

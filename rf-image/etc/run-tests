@@ -51,7 +51,7 @@ if [ $ALLURE_REPORT = true ]; then
 fi
 
 # No need for the overhead of Pabot if no parallelisation is required
-if [ -z "$CROSS_BROWSER" ]
+if [ $CROSS_BROWSER = false ]
 then
     execute_script "$AUTO_BROWSER" "$ROBOT_REPORTS_FINAL_DIR"
 else

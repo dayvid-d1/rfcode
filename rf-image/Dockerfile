@@ -33,6 +33,12 @@ COPY /etc /etc/
 
 RUN apt-get update; \
     xargs apt-get install -y --no-install-recommends </etc/package-list; \
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash; \
+    nvm install 14.4.0; \
+    curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -; \
+    apt-get install -y nodejs; \
+    npm init; \
+    apt install build-essential; \
     rm -rf /var/lib/apt/lists /var/cache/apt/*.bin; \
     apt-get clean; \
     pip3 install --disable-pip-version-check --no-cache-dir --no-warn-script-location -r /etc/requirements.txt 
@@ -46,6 +52,7 @@ WORKDIR /home/app/rfcode
 VOLUME /var/log 
 VOLUME /home/app/rfcode/test
 VOLUME /home/app/rfcode/reports
+VOLUME /home/app/rfcode/setup
 EXPOSE 8080
 
 CMD ["sh", "-c", "chown app:app /dev/stdout && chown app:app /home/app/rfcode && exec gosu app supervisord"]
