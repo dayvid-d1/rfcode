@@ -21,12 +21,13 @@ ENV USER_UID=1000 \
     ROBOT_DATA_DIR=/home/${RF_USER}/rfcode/data    \
     ROBOT_SETUP_DIR=/home/${RF_USER}/rfcode/setup \
     ROBOT_BROWSER_DIR=/home/${RF_USER}/rfcode/setup/pw-browsers \
+    PLAYWRIGHT_BROWSERS_PATH=${ROBOT_BROWSER_DIR} \
     ROBOT_TESTS_DIR=/home/${RF_USER}/rfcode/test \
     ROBOT_REPORTS_DIR=/home/${RF_USER}/rfcode/reports \
     RUN_TESTS=/home/${RF_USER}/rfcode/run-tests \
     PATH=$PATH:${ROBOT_REPORTS_DIR}:${ROBOT_TESTS_DIR}:${ROBOT_SETUP_DIR} \
-    AUTO_BROWSER=chromium \
-    PLAYWRIGHT_BROWSERS_PATH=''
+    AUTO_BROWSER=chromium
+    
 
 COPY --from=easy-novnc-build /bin/easy-novnc /usr/local/bin/
 COPY /etc /etc/
