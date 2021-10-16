@@ -31,10 +31,11 @@ chmod 755 /etc/run-tests
 dos2unix /etc/run-tests
 
 echo "$(timestamp) rfbrowser initialization"
+npm i -g npx
 npm i acorn-import-assertions
 rfbrowser init --skip-browsers
 echo "$(timestamp) Installing Playwright"
 PLAYWRIGHT_BROWSERS_PATH=$ROBOT_BROWSER_DIR 
 export PLAYWRIGHT_BROWSERS_PATH
-npm i playwright install
+npx playwright install
 rm -rf  /tmp/*
