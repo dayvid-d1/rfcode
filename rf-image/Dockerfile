@@ -45,6 +45,7 @@ COPY /bin/menu.xml /etc/xdg/openbox/
 
 COPY /install /tmp/
 RUN dos2unix /tmp/install.sh; \
+    chmod +x /tmp/install.sh; \
     /tmp/install.sh
 
 WORKDIR /home/app/rfcode
