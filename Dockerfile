@@ -31,7 +31,7 @@ COPY --from=easy-novnc-build /bin/easy-novnc /usr/local/bin/
 COPY /etc /etc/
 
 RUN apt update; \
-    apt install software-properties-common; \
+    apt install software-properties-common -y; \
     add-apt-repository ppa:deadsnakes/ppa; \
     xargs apt-get install -y --no-install-recommends </etc/package-list; \      
     pip3 install --disable-pip-version-check --no-cache-dir --no-warn-script-location -r /etc/requirements.txt 
