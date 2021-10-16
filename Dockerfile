@@ -35,11 +35,10 @@ RUN apt-get update; \
     add-apt-repository ppa:deadsnakes/ppa -y; \
     xargs apt-get install -y --no-install-recommends </etc/package-list; \
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash; \
-    nvm install 14.4.0; \
+    nvm install node; \
     curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -; \
-    apt-get install -y nodejs; \
-    npm init; \
-    apt install build-essential; \
+    apt-get install -y nodejs; \   
+    apt install build-essential -y; \
     rm -rf /var/lib/apt/lists /var/cache/apt/*.bin; \
     apt-get clean; \
     pip3 install --disable-pip-version-check --no-cache-dir --no-warn-script-location -r /etc/requirements.txt 
