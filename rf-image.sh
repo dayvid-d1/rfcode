@@ -140,12 +140,7 @@ if [[ ! -n "$RF_VOLUME_NAME" ]]; then
 	RF_VOLUME_NAME="rf-volume"
 fi
 if [[ ! -n "$RF_RESOURCES" ]]; then
-	RF_RESOURCES="$(dirname "$PWD")/rfcode/workspace"
-  mkdir -p "$RF_RESOURCES/reports"
-  mkdir -p "$RF_RESOURCES/test"
-  mkdir -p "$RF_RESOURCES/logs"
-  mkdir -p "$RF_RESOURCES/setup"
-  mkdir -p "$RF_RESOURCES/data"
+	RF_RESOURCES="${CURRENT_DIR}/workspace"
 fi
 if [[ ! -n "$CONTINENT" ]]; then
 	CONTINENT="America"
@@ -185,17 +180,12 @@ if [[ ! -n "$RF_USER" ]]; then
 	exit 1
 fi
 
-RF_IMAGE_ID=""
-RF_IMAGE_ID=$(docker image inspect --format=\"{{.Id}}\" ${RF_IMAGE} 2> /dev/null) :;
-
-
-if [ -z "$RF_IMAGE_ID" ]; then  
+if [ -z $(docker image inspect --format=\"{{.Id}}\" ${RF_IMAGE}) ]; then  
   echo "$(timestamp) Building Base image"  
   docker pull $RF_IMAGE
   echo "$(timestamp) Base image built successfully"
 fi
 cd ${CURRENT_DIR}
-
 
 if [ -z $(docker ps -q -f name=${RF_CONTAINER_NAME}) ]; then    
   if [ "$(docker container inspect -f '{{.State.Status}}' ${RF_CONTAINER_NAME})" == "exited" ]; then
@@ -209,6 +199,13 @@ if [ -z $(docker ps -q -f name=${RF_CONTAINER_NAME}) ]; then
 #echo "$(timestamp) RF container $RF_CONTAINER_NAME to be set"
   echo "$(timestamp) Creating new RF volume"
   docker volume create $RF_VOLUME_NAME
+
+  echo "$(timestamp) Ensuring RF Directories"
+  mkdir -p "$RF_RESOURCES/reports"
+  mkdir -p "$RF_RESOURCES/test"
+  mkdir -p "$RF_RESOURCES/logs"
+  mkdir -p "$RF_RESOURCES/setup"
+  mkdir -p "$RF_RESOURCES/data"
 
   echo "$(timestamp) Initiating RF container run"
   docker run \
