@@ -28,25 +28,17 @@ ENV USER_UID=1000 \
     PATH=$PATH:${ROBOT_REPORTS_DIR}:${ROBOT_TESTS_DIR}:${ROBOT_SETUP_DIR} \
     AUTO_BROWSER=chromium
     
-
 COPY --from=easy-novnc-build /bin/easy-novnc /usr/local/bin/
 COPY /etc /etc/
-
-RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -; \
-    apt-get update -y; \
-    xargs apt-get install -y --no-install-recommends </etc/package-list; \
-    pip3 install --disable-pip-version-check --no-cache-dir --no-warn-script-location -r /etc/requirements.txt 
-
-COPY /bin/menu.xml /etc/xdg/openbox/
-
 COPY /install /tmp/
+
 RUN dos2unix /tmp/install.sh; \
     chmod +x /tmp/install.sh; \
     /tmp/install.sh
+
+COPY /bin/menu.xml /etc/xdg/openbox/
     #rm -rf /var/lib/apt/lists /var/cache/apt/*.bin; \
     #apt-get clean; \
-
-
 
 WORKDIR /home/app/rfcode
 VOLUME /var/log 

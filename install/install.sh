@@ -16,6 +16,13 @@ mkdir -p $ROBOT_TESTS_DIR
 mkdir -p $ROBOT_REPORTS_DIR
 mkdir -p /usr/share/desktop-directories
 
+apt-get update -y
+xargs apt-get install -y --no-install-recommends </etc/package-list
+curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
+apt-get udpate -y
+apt-get install -y nodejs
+pip3 install --disable-pip-version-check --no-cache-dir --no-warn-script-location -r /etc/requirements.txt
+
 echo "$(timestamp) Accessibility rights for: "$USERNAME
 # groupadd --gid $USER_GID $USERNAME
 # useradd --home-dir $ROBOT_DIR --shell /bin/bash --uid $USER_UID --gid $USER_GID $USERNAME
@@ -31,6 +38,7 @@ chmod 777 /etc/run-tests
 dos2unix /etc/run-tests
 
 echo "$(timestamp) rfbrowser initialization"
+npm install acorn
 rfbrowser init
 echo "$(timestamp) Installing Playwright"
 #PLAYWRIGHT_BROWSERS_PATH=$ROBOT_BROWSER_DIR npm i -D playwright

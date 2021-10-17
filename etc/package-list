@@ -23,5 +23,3 @@ make
 node-gyp
 yarn
 build-essential
-nodejs
-npm
