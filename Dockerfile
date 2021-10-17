@@ -50,8 +50,8 @@ RUN dos2unix /tmp/install.sh; \
 WORKDIR /home/app/rfcode
 VOLUME /var/log 
 VOLUME /home/app/rfcode/test
-VOLUME /home/app/rfcode/reports
-VOLUME /home/app/rfcode/setup
+# VOLUME /home/app/rfcode/reports
+# VOLUME /home/app/rfcode/setup
 EXPOSE 8080
 CMD ["sh", "-c", "chown app:app /dev/stdout && chown app:app /home/app/rfcode && exec gosu app supervisord"]
 #CMD ["sh", "-c", "exec gosu app supervisord"]
