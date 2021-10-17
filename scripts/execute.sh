@@ -31,7 +31,7 @@ echo "RF-IMAGE SETUP"
 RF_IMAGE=ghcr.io/dayvid-d1/rf-image:test
 ROBOT_THREADS=4
 RF_PORT=8181
-RESOURCES=""$(dirname "$PWD")/workspace"
+RESOURCES="$(dirname "$PWD")/workspace"
 
 chmod +x ./scripts/rf-image.sh
 #dos2unix ./scripts/rf-image.sh
