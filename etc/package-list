@@ -9,7 +9,6 @@ tigervnc-standalone-server
 supervisor
 gosu
 python3.9
-python3.9-pip
 python3.9-dev
 python3.9-venv
 openbox
