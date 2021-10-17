@@ -27,7 +27,7 @@ echo "$(timestamp) Accessibility rights for: "$USERNAME
 groupadd --gid $USER_GID $USERNAME
 useradd --home-dir $ROBOT_DIR --shell /bin/bash --uid $USER_UID --gid $USER_GID $USERNAME
 chown -R $USERNAME:$USERNAME $ROBOT_DIR
-Chown -R $USERNAME:$USERNAME /dev/stdout
+chown -R $USERNAME:$USERNAME /dev/stdout
 chown -R $USERNAME:$USERNAME /var/log
 
 echo "$(timestamp) Permissions for others"
