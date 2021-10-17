@@ -8,7 +8,7 @@ timestamp() {
 	date +"%Y-%m-%d %T"
 }
 
-echo "Setting up container dependencies"
+echo "$(timestamp) Setting up container dependencies"
 apt-get update -y
 xargs apt-get install -y --no-install-recommends </etc/package-list
 curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
