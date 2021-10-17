@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-set -ex
+set -x
 
 #Robot - Pabot Script
 execute_script(){
