@@ -14,4 +14,6 @@ xargs apt-get install -y --no-install-recommends </etc/package-list
 curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
 apt-get update -y
 apt-get install -y nodejs
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python3.9 get-pip.py
 pip3 install --disable-pip-version-check --no-cache-dir --no-warn-script-location -r /etc/requirements.txt
