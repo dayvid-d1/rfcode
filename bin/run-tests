@@ -2,6 +2,9 @@
 
 set -x
 
+timestamp() {
+	date +"%Y-%m-%d %T"
+}
 #Robot - Pabot Script
 execute_script(){
     export AUTO_BROWSER="$1"
@@ -15,6 +18,7 @@ execute_script(){
     mkdir -p ${ROBOT_REPORTS_FINAL_DIR}
     if [ $ROBOT_THREADS -eq 1 ]
     then
+        echo "$(timestamp) Robot run"
         xvfb-run \
             --server-args="-screen 0 ${SCREEN_WIDTH}x${SCREEN_HEIGHT}x${SCREEN_COLOUR_DEPTH} -ac" \
             robot \
@@ -22,6 +26,7 @@ execute_script(){
             ${ROBOT_OPTIONS} \
             $ROBOT_TESTS_DIR 
     else
+        echo "$(timestamp) Pabot run"
         xvfb-run \
             --server-args="-screen 0 ${SCREEN_WIDTH}x${SCREEN_HEIGHT}x${SCREEN_COLOUR_DEPTH} -ac" \
             pabot \
@@ -35,6 +40,7 @@ execute_script(){
 
 export HOME=${ROBOT_DIR}
     
+echo "$(timestamp) Report Folder"
 if [ -z "${ROBOT_TEST_RUN_ID}" ]; then
     ROBOT_TEST_RUN_ID=${CONTINENT}_${PLACE}_$(date '+%d-%m-%Y_%H-%M-%S')
     export ROBOT_REPORTS_FINAL_DIR="${ROBOT_REPORTS_DIR}/${ROBOT_TEST_RUN_ID}"
@@ -49,13 +55,14 @@ else
     fi  
 fi
 
+echo "$(timestamp) Allure report setup"
 if [ $ALLURE_REPORT = true ]; then
     export ROBOT_ALLURE_DIR="${ROBOT_REPORTS_DIR}/allure"
     mkdir -p ${ROBOT_ALLURE_DIR}
     ROBOT_OPTIONS="${ROBOT_OPTIONS} --listener allure_robotframework;${ROBOT_ALLURE_DIR}"
 fi
 
-# No need for the overhead of Pabot if no parallelisation is required
+echo "$(timestamp) Cross Browser of Auto Browser"
 if [ $CROSS_BROWSER = false ]
 then
     execute_script "$AUTO_BROWSER" "$ROBOT_REPORTS_FINAL_DIR"
