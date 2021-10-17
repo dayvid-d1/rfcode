@@ -40,9 +40,9 @@ RUN dos2unix /tmp/install.sh; \
     chmod +x /tmp/install.sh; \
     /tmp/install.sh
 
-COPY /bin/supervisord.conf /etc/; \
-     /bin/run-tests /etc/; \
-     /bin/menu.xml /etc/xdg/openbox/
+COPY /bin/supervisord.conf /etc/
+COPY /bin/run-tests /etc/
+COPY /bin/menu.xml /etc/xdg/openbox/
     #rm -rf /var/lib/apt/lists /var/cache/apt/*.bin; \
     #apt-get clean; \
 
