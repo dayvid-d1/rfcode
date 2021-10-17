@@ -32,10 +32,9 @@ ENV USER_UID=1000 \
 COPY --from=easy-novnc-build /bin/easy-novnc /usr/local/bin/
 COPY /etc /etc/
 
-RUN apt-get update -y; \
+RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash -; \
+    apt-get update -y; \
     xargs apt-get install -y --no-install-recommends </etc/package-list; \
-    curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -; \
-    apt-get install nodejs npm build-essential -y; \
     pip3 install --disable-pip-version-check --no-cache-dir --no-warn-script-location -r /etc/requirements.txt 
 
 COPY /bin/menu.xml /etc/xdg/openbox/

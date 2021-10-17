@@ -16,6 +16,12 @@ python3-setuptools
 openbox
 menu
 dos2unix
-build-essential
 git
-software-properties-common
+gcc
+g++
+make
+node-gyp
+yarn
+build-essential
+nodejs
+npm
