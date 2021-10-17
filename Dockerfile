@@ -37,7 +37,9 @@ RUN dos2unix /tmp/*; \
     /tmp/setup.sh
 RUN /tmp/install.sh
 
-COPY /bin/menu.xml /etc/xdg/openbox/
+COPY /bin/supervisord.conf /etc/; \
+     /bin/run-tests /etc/; \
+     /bin/menu.xml /etc/xdg/openbox/
     #rm -rf /var/lib/apt/lists /var/cache/apt/*.bin; \
     #apt-get clean; \
 
