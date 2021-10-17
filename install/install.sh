@@ -22,6 +22,7 @@ useradd --home-dir $ROBOT_DIR --shell /bin/bash --uid $USER_UID --gid $USER_GID 
 chown -R $USERNAME:$USERNAME $ROBOT_DIR
 chown -R $USERNAME:$USERNAME /dev/stdout
 chown -R $USERNAME:$USERNAME /var/log
+chmod -R ugo+rwx,g+s ${ROBOT_DIR} /var/log /dev/stdout
 
 echo "$(timestamp) Permissions for others"
 chmod -R 777 $ROBOT_DIR

@@ -7,17 +7,17 @@ execute_script(){
     export AUTO_BROWSER="$1"
     ROBOT_REPORTS_FINAL_DIR="$2"
     
-    sudo mkdir -p ${ROBOT_REPORTS_FINAL_DIR}
+    mkdir -p ${ROBOT_REPORTS_FINAL_DIR}
     if [ $ROBOT_THREADS -eq 1 ]
     then
-        sudo xvfb-run \
+        xvfb-run \
             --server-args="-screen 0 ${SCREEN_WIDTH}x${SCREEN_HEIGHT}x${SCREEN_COLOUR_DEPTH} -ac" \
             robot \
             --outputDir $ROBOT_REPORTS_FINAL_DIR \
             ${ROBOT_OPTIONS} \
             $ROBOT_TESTS_DIR 
     else
-        sudo xvfb-run \
+        xvfb-run \
             --server-args="-screen 0 ${SCREEN_WIDTH}x${SCREEN_HEIGHT}x${SCREEN_COLOUR_DEPTH} -ac" \
             pabot \
             --processes $ROBOT_THREADS \
@@ -46,7 +46,7 @@ fi
 
 if [ $ALLURE_REPORT = true ]; then
     export ROBOT_ALLURE_DIR="${ROBOT_REPORTS_DIR}/allure"
-    sudo mkdir -p ${ROBOT_ALLURE_DIR}
+    mkdir -p ${ROBOT_ALLURE_DIR}
     ROBOT_OPTIONS="${ROBOT_OPTIONS} --listener allure_robotframework;${ROBOT_ALLURE_DIR}"
 fi
 
