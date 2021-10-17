@@ -7,7 +7,7 @@ execute_script(){
     export AUTO_BROWSER="$1"
     ROBOT_REPORTS_FINAL_DIR="$2"
     
-    mkdir -p ${ROBOT_REPORTS_FINAL_DIR}
+    sudo mkdir -p ${ROBOT_REPORTS_FINAL_DIR}
     if [ $ROBOT_THREADS -eq 1 ]
     then
         xvfb-run \
