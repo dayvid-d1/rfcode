@@ -35,14 +35,15 @@ COPY /install/setup.sh /tmp/
 RUN dos2unix /tmp/setup.sh; \
     chmod +x /tmp/setup.sh; \
     /tmp/setup.sh
+
+COPY /bin/menu.xml /etc/xdg/openbox/
+COPY /bin/supervisord.conf /etc/
+COPY /bin/run-tests /etc/
+
 COPY /install/install.sh /tmp/
 RUN dos2unix /tmp/install.sh; \
     chmod +x /tmp/install.sh; \
     /tmp/install.sh
-
-COPY /bin/supervisord.conf /etc/
-COPY /bin/run-tests /etc/
-COPY /bin/menu.xml /etc/xdg/openbox/
     #rm -rf /var/lib/apt/lists /var/cache/apt/*.bin; \
     #apt-get clean; \
 
