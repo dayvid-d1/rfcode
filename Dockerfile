@@ -35,8 +35,7 @@ COPY /etc /etc/
 RUN apt-get update -y; \
     xargs apt-get install -y --no-install-recommends </etc/package-list; \
     curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -; \
-    apt-get install -y nodejs;\
-    apt-get install -y build-essential; \
+    apt-get install -y nodejs npm build-essential; \
     pip3 install --disable-pip-version-check --no-cache-dir --no-warn-script-location -r /etc/requirements.txt 
 
 COPY /bin/menu.xml /etc/xdg/openbox/
