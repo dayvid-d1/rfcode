@@ -30,12 +30,15 @@ ENV USER_UID=1000 \
     
 COPY --from=easy-novnc-build /bin/easy-novnc /usr/local/bin/
 COPY /etc /etc/
-COPY /install /tmp/
 
-RUN dos2unix /tmp/*; \
-    chmod +x /tmp/*; \
+COPY /install/setup.sh /tmp/
+RUN dos2unix /tmp/setup.sh; \
+    chmod +x /tmp/setup.sh; \
     /tmp/setup.sh
-RUN /tmp/install.sh
+COPY /install/install.sh /tmp/
+RUN dos2unix /tmp/install.sh; \
+    chmod +x /tmp/install.sh; \
+    /tmp/install.sh
 
 COPY /bin/supervisord.conf /etc/; \
      /bin/run-tests /etc/; \
