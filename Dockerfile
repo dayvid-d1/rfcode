@@ -32,9 +32,10 @@ COPY --from=easy-novnc-build /bin/easy-novnc /usr/local/bin/
 COPY /etc /etc/
 COPY /install /tmp/
 
-RUN dos2unix /tmp/install.sh; \
-    chmod +x /tmp/install.sh; \
-    /tmp/install.sh
+RUN dos2unix /tmp/*; \
+    chmod +x /tmp/*; \
+    /tmp/setup.sh
+RUN /tmp/install.sh
 
 COPY /bin/menu.xml /etc/xdg/openbox/
     #rm -rf /var/lib/apt/lists /var/cache/apt/*.bin; \
