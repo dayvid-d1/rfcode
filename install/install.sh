@@ -19,7 +19,7 @@ mkdir -p /usr/share/desktop-directories
 apt-get update -y
 xargs apt-get install -y --no-install-recommends </etc/package-list
 curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
-apt-get udpate -y
+apt-get update -y
 apt-get install -y nodejs
 pip3 install --disable-pip-version-check --no-cache-dir --no-warn-script-location -r /etc/requirements.txt
 
