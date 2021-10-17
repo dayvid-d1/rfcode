@@ -48,7 +48,7 @@ RUN dos2unix /tmp/install.sh; \
     #apt-get clean; \
 
 WORKDIR /home/app/rfcode
-VOLUME /var/log 
+#VOLUME /var/log 
 VOLUME /home/app/rfcode/test
 # VOLUME /home/app/rfcode/reports
 # VOLUME /home/app/rfcode/setup

@@ -6,6 +6,9 @@ set -x
 execute_script(){
     export AUTO_BROWSER="$1"
     ROBOT_REPORTS_FINAL_DIR="$2"
+
+    echo "$(timestamp) Installing Playwright"
+    PLAYWRIGHT_BROWSERS_PATH=$ROBOT_BROWSER_DIR npm i -D playwright
     
     mkdir -p ${ROBOT_REPORTS_FINAL_DIR}
     if [ $ROBOT_THREADS -eq 1 ]

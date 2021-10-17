@@ -33,7 +33,5 @@ dos2unix /etc/run-tests
 
 echo "$(timestamp) rfbrowser initialization"
 npm install acorn@^8
-rfbrowser init
-echo "$(timestamp) Installing Playwright"
-#PLAYWRIGHT_BROWSERS_PATH=$ROBOT_BROWSER_DIR npm i -D playwright
+rfbrowser init --skip-browsers
 rm -rf  /tmp/*
