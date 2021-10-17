@@ -17,11 +17,11 @@ mkdir -p $ROBOT_REPORTS_DIR
 mkdir -p /usr/share/desktop-directories
 
 echo "$(timestamp) Accessibility rights for: "$USERNAME
-groupadd --gid $USER_GID $USERNAME
-useradd --home-dir $ROBOT_DIR --shell /bin/bash --uid $USER_UID --gid $USER_GID $USERNAME
-chown -R $USERNAME:$USERNAME $ROBOT_DIR
-chown -R $USERNAME:$USERNAME /dev/stdout
-chown -R $USERNAME:$USERNAME /var/log
+# groupadd --gid $USER_GID $USERNAME
+# useradd --home-dir $ROBOT_DIR --shell /bin/bash --uid $USER_UID --gid $USER_GID $USERNAME
+# chown -R $USERNAME:$USERNAME $ROBOT_DIR
+# chown -R $USERNAME:$USERNAME /dev/stdout
+# chown -R $USERNAME:$USERNAME /var/log
 
 echo "$(timestamp) Permissions for others"
 chmod -R 777 $ROBOT_DIR
