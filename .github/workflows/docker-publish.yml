@@ -107,8 +107,8 @@ jobs:
       
       - name: Test GitHub image
         run: |
-         chmod +x ./rf-image.sh
-         ./rf-image.sh -i ${{ env.GITHUB_REG }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.TEST_VERSION }} -m ${{ env.TEST_USER }} -p ${{ env.TEST_PORT }}
+         chmod +x ./scripts/execute.sh
+         ./scripts/execute.sh -i ${{ env.GITHUB_REG }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.TEST_VERSION }} -m ${{ env.TEST_USER }} -p ${{ env.TEST_PORT }}
 
       - name: Image digest
         run: echo ${{ steps.docker_build_docker.outputs.digest }}
