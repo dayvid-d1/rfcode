@@ -74,7 +74,7 @@ fi
 
 ROBOT_EXIT_CODE=$?
 
-exit 0
+exit $?
 
 if [ $ALLURE_REPORT = true ]
 then
