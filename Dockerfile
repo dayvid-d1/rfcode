@@ -31,8 +31,7 @@ COPY --from=easy-novnc-build /bin/easy-novnc /usr/local/bin/
 COPY /etc /etc/
 
 COPY /install/setup.sh /tmp/
-RUN dos2unix /tmp/setup.sh; \
-    chmod +x /tmp/setup.sh; \
+RUN chmod +x /tmp/setup.sh; \
     /tmp/setup.sh
 
 COPY /bin/menu.xml /etc/xdg/openbox/
@@ -40,8 +39,7 @@ COPY /bin/supervisord.conf /etc/
 COPY /bin/run-tests /etc/
 
 COPY /install/install.sh /tmp/
-RUN dos2unix /tmp/install.sh; \
-    chmod +x /tmp/install.sh; \
+RUN chmod +x /tmp/install.sh; \
     /tmp/install.sh    
 
 WORKDIR /home/app/rfcode
