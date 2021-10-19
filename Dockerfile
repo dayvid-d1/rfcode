@@ -32,7 +32,7 @@ COPY /etc /etc/
 
 COPY /install/setup.sh /tmp/
 RUN chmod +x /tmp/setup.sh; \
-    /tmp/setup.sh
+    . /tmp/setup.sh
 
 COPY /bin/menu.xml /etc/xdg/openbox/
 COPY /bin/supervisord.conf /etc/
