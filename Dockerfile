@@ -53,5 +53,5 @@ VOLUME /home/app/rfcode/test
 # VOLUME /home/app/rfcode/setup
 
 EXPOSE 8080
-CMD ["bash", ${USERNAME}" -c", "exec gosu app supervisord"]
+CMD ["bash", "pwuser -c", "exec gosu app supervisord"]
 #CMD ["sh", "-c", "exec gosu app supervisord"]
