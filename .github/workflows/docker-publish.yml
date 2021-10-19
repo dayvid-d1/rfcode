@@ -66,7 +66,7 @@ jobs:
         with:
           context: ./
           file: ./Dockerfile
-          build-args: RF_USER=${{ env.TEST_USER }}
+          build-args: USERNAME=${{ env.TEST_USER }}
           builder: ${{ steps.buildx_github.outputs.name }}
           push: ${{ github.event_name != 'pull_request' }}
           tags:  ${{ env.GITHUB_REG }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.TEST_VERSION }}
@@ -154,7 +154,7 @@ jobs:
         with:
           context: ./
           file: ./Dockerfile
-          build-args: RF_USER=${{ env.TEST_USER }}
+          build-args: USERNAME=${{ env.TEST_USER }}
           builder: ${{ steps.buildx_docker.outputs.name }}
           push: ${{ github.event_name != 'pull_request' }}
           tags:  ${{ env.DOCKER_REG }}/${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
