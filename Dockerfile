@@ -8,7 +8,8 @@ RUN . /etc/novnc.sh; \
 FROM marketsquare/robotframework-browser:latest
 
 ARG USERNAME
-ENV USER_UID=1000 \
+ENV USERNAME=pwuser\
+    USER_UID=1000 \
     USER_GID=1000 \
     SCREEN_COLOUR_DEPTH=24 \
     SCREEN_HEIGHT=1080 \
