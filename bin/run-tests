@@ -13,7 +13,6 @@ execute_script(){
     echo "$(timestamp) Installing Playwright"
     PLAYWRIGHT_BROWSERS_PATH=$ROBOT_BROWSER_DIR npm i -D playwright
     PLAYWRIGHT_BROWSERS_PATH=$ROBOT_BROWSER_DIR npm i -D playwright install-deps
-    PLAYWRIGHT_BROWSERS_PATH=$ROBOT_BROWSER_DIR npm i -D playwright test
 
     mkdir -p ${ROBOT_REPORTS_FINAL_DIR}
     if [ $ROBOT_THREADS -eq 1 ]
