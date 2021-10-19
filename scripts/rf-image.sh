@@ -213,7 +213,7 @@ echo "$(timestamp) Initiating RF container run"
 docker run \
   --name=$RF_CONTAINER_NAME \
   --ipc=host \
-  --user ${RF_USER}
+  --user ${RF_USER} \
   --security-opt seccomp=seccomp_profile.json \
   --privileged \
   -v "/${RF_RESOURCES}/test":/home/app/rfcode/test \
