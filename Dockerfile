@@ -44,7 +44,7 @@ COPY /install/install.sh /tmp/
 RUN chmod +x /tmp/install.sh; \
     /tmp/install.sh    
 
-USER ${USERNAME}
+#USER ${USERNAME}
 
 WORKDIR /home/app/rfcode
 #VOLUME /var/log 
@@ -54,4 +54,4 @@ VOLUME /home/app/rfcode/test
 
 EXPOSE 8080
 #CMD ["bash", "pwuser -c", "exec gosu pwuser supervisord"]
-CMD ["sh", "pwuser -c", "exec gosu pwuser supervisord"]
+CMD ["sh", "-c", "exec gosu pwuser supervisord"]
