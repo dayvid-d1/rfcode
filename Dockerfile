@@ -31,8 +31,8 @@ COPY --from=easy-novnc-build /bin/easy-novnc /usr/local/bin/
 COPY /etc /etc/
 
 COPY /install/setup.sh /tmp/
-RUN chmod +x /tmp/setup.sh; \
-    . /tmp/setup.sh
+RUN sudo chmod +x /tmp/setup.sh; \
+    sudo /tmp/setup.sh
 
 COPY /bin/menu.xml /etc/xdg/openbox/
 COPY /bin/supervisord.conf /etc/
