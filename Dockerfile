@@ -8,8 +8,7 @@ RUN . /etc/novnc.sh; \
 FROM marketsquare/robotframework-browser:latest
 
 ARG USERNAME
-ENV USERNAME=pwuser\
-    USER_UID=1000 \
+ENV USER_UID=1000 \
     USER_GID=1000 \
     SCREEN_COLOUR_DEPTH=24 \
     SCREEN_HEIGHT=1080 \
@@ -31,9 +30,11 @@ ENV USERNAME=pwuser\
 COPY --from=easy-novnc-build /bin/easy-novnc /usr/local/bin/
 COPY /etc /etc/
 
+USER root
+
 COPY /install/setup.sh /tmp/
-RUN apt-get install sudo; sudo chmod +x /tmp/setup.sh; \
-    sudo /tmp/setup.sh
+RUN chmod +x /tmp/setup.sh; \
+    /tmp/setup.sh
 
 COPY /bin/menu.xml /etc/xdg/openbox/
 COPY /bin/supervisord.conf /etc/
@@ -42,6 +43,8 @@ COPY /bin/run-tests /etc/
 COPY /install/install.sh /tmp/
 RUN chmod +x /tmp/install.sh; \
     /tmp/install.sh    
+
+USER ${USERNAME}}
 
 WORKDIR /home/app/rfcode
 #VOLUME /var/log 
