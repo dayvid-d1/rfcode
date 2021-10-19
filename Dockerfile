@@ -31,7 +31,7 @@ COPY --from=easy-novnc-build /bin/easy-novnc /usr/local/bin/
 COPY /etc /etc/
 
 COPY /install/setup.sh /tmp/
-RUN sudo chmod +x /tmp/setup.sh; \
+RUN apt-get install sudo; sudo chmod +x /tmp/setup.sh; \
     sudo /tmp/setup.sh
 
 COPY /bin/menu.xml /etc/xdg/openbox/
