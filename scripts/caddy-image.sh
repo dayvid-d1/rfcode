@@ -111,6 +111,7 @@ docker volume create $CADDY_VOLUME_NAME
 echo "$(timestamp) Initiating caddy container run"
 docker run --name=$CADDY_CONTAINER_NAME \
   --detach \
+  --rm \
   -v=$CADDY_VOLUME_NAME:/data \
   --restart=unless-stopped \
   --env=APP_USERNAME="${CADDY_USER}" \
