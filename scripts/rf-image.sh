@@ -212,7 +212,6 @@ wget https://raw.githubusercontent.com/microsoft/playwright/master/utils/docker/
 echo "$(timestamp) Initiating RF container run"
 docker run \
   --name=$RF_CONTAINER_NAME \
-  --user ${RF_USER} \
   --privileged \
   -v "/${RF_RESOURCES}/test":/home/app/rfcode/test \
   -v=$RF_VOLUME_NAME \
