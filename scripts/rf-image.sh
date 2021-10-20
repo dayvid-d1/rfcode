@@ -208,11 +208,13 @@ mkdir -p "$RF_RESOURCES/logs"
 mkdir -p "$RF_RESOURCES/setup"
 mkdir -p "$RF_RESOURCES/data"
 
-wget https://raw.githubusercontent.com/microsoft/playwright/master/utils/docker/seccomp_profile.json
+
 echo "$(timestamp) Initiating RF container run"
 docker run \
   --name=$RF_CONTAINER_NAME \
   --privileged \
+  --rm \
+  --detach \
   -v "/${RF_RESOURCES}/test":/home/app/rfcode/test \
   -v=$RF_VOLUME_NAME \
   -e ROBOT_THREADS=4 \
