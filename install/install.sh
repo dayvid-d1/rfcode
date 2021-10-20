@@ -34,4 +34,6 @@ dos2unix /etc/run-tests
 echo "$(timestamp) rfbrowser initialization"
 PLAYWRIGHT_BROWSERS_PATH=$ROBOT_BROWSER_DIR
 rfbrowser init
+npx Playwright install
+npx Playwright install-deps
 rm -rf  /tmp/*
