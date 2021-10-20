@@ -69,8 +69,6 @@ fi
 
 ROBOT_EXIT_CODE=$?
 
-exit $?
-
 if [ $ALLURE_REPORT = true ]
 then
     cd ${ROBOT_REPORTS_DIR}
