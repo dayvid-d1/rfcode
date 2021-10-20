@@ -113,7 +113,6 @@ docker run --name=$CADDY_CONTAINER_NAME \
   --detach \
   --rm \
   -v=$CADDY_VOLUME_NAME:/data \
-  --restart=unless-stopped \
   --env=APP_USERNAME="${CADDY_USER}" \
   --env=APP_PASSWORD_HASH="${CADDY_SECRET}" \
   --publish=${CADDY_PORT}:8080 \
