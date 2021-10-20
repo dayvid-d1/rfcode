@@ -36,5 +36,4 @@ rfbrowser init
 npm i -g playwright
 npx playwright install
 npx playwright install-deps
-npm run dev
 rm -rf  /tmp/*
