@@ -25,7 +25,8 @@ ENV USER_UID=1000 \
     ROBOT_REPORTS_DIR=/home/${USERNAME}/rfcode/reports \
     RUN_TESTS=/home/${USERNAME}/rfcode/run-tests \
     PATH=$PATH:${ROBOT_REPORTS_DIR}:${ROBOT_TESTS_DIR}:${ROBOT_SETUP_DIR} \
-    AUTO_BROWSER=chromium
+    AUTO_BROWSER=chromium \
+    NODE_PATH=/usr/lib/node_modules
     
 COPY --from=easy-novnc-build /bin/easy-novnc /usr/local/bin/
 COPY /etc /etc/
