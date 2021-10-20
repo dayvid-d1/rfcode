@@ -8,12 +8,13 @@ timestamp() {
 	date +"%Y-%m-%d %T"
 }
 
+
+echo "$(timestamp) Setting up container dependencies"
 apt-get update
 xargs apt-get install -y --no-install-recommends </etc/package-list
-echo "$(timestamp) Setting up container dependencies"
-echo "deb https://deb.nodesource.com/node_14.x buster main" > /etc/apt/sources.list.d/nodesource.list
-wget -qO- https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -
-apt-get install -yqq nodejs npm
+curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+apt-get install -yqq nodejs
+
 pip3 install --disable-pip-version-check --no-cache-dir --no-warn-script-location -r /etc/requirements.txt
 
 rm -rf /var/lib/apt/lists /var/cache/apt/*.bin
