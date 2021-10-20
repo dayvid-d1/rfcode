@@ -31,7 +31,7 @@ chmod -R 777 /var/log
 chmod 777 /etc/run-tests
 dos2unix /etc/run-tests
 
-#echo "$(timestamp) rfbrowser initialization"
-#npm install acorn@^8
-#rfbrowser init --skip-browsers
+echo "$(timestamp) rfbrowser initialization"
+npm install acorn@^8
+rfbrowser init --skip-browsers
 rm -rf  /tmp/*

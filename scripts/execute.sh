@@ -8,7 +8,7 @@ echo "CADDY SETUP"
 #===================================================================================
 
 CADDY_IMAGE="davidclement/caddy-image:latest"
-CADDY_USER="pwuser"
+CADDY_USER="app"
 CADDY_SECRET="JDJhJDEwJDF5U3AuelBxMENaN2o4M1lHWS92cE9iU1QyNjRSWTlCRFJYdmFYT0l3VlRtaXBCcXlGMGRx"
 CADDY_PORT=8129
 

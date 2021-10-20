@@ -5,7 +5,7 @@ COPY /bin/novnc.sh /etc/
 RUN . /etc/novnc.sh; \
     rm /etc/novnc.sh
 
-FROM marketsquare/robotframework-browser:latest
+FROM ubuntu:20.04
 
 ARG USERNAME
 ENV USER_UID=1000 \
@@ -30,10 +30,9 @@ ENV USER_UID=1000 \
 COPY --from=easy-novnc-build /bin/easy-novnc /usr/local/bin/
 COPY /etc /etc/
 
-USER root
-
 COPY /install/setup.sh /tmp/
-RUN chmod +x /tmp/setup.sh; \
+RUN dos2unix /tmp/setup.sh; \
+    chmod +x /tmp/setup.sh; \
     /tmp/setup.sh
 
 COPY /bin/menu.xml /etc/xdg/openbox/
@@ -41,18 +40,15 @@ COPY /bin/supervisord.conf /etc/
 COPY /bin/run-tests /etc/
 
 COPY /install/install.sh /tmp/
-RUN chmod +x /tmp/install.sh; \
-    /tmp/install.sh    
-
-#USER ${USERNAME}
+RUN dos2unix /tmp/install.sh; \
+    chmod +x /tmp/install.sh; \
+    /tmp/install.sh
 
 WORKDIR /home/app/rfcode
 #VOLUME /var/log 
 VOLUME /home/app/rfcode/test
 # VOLUME /home/app/rfcode/reports
 # VOLUME /home/app/rfcode/setup
-
 EXPOSE 8080
-#CMD ["bash", "pwuser -c", "exec gosu pwuser supervisord"]
-#CMD ["sh", "-c", "sudo exec gosu pwuser supervisord"]
-CMD ["/etc/run-tests.sh"]
+
+CMD ["sh", "-c", "exec gosu app supervisord"]
