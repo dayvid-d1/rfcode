@@ -39,6 +39,7 @@ RUN dos2unix /tmp/setup.sh; \
 COPY /bin/menu.xml /etc/xdg/openbox/
 COPY /bin/supervisord.conf /etc/
 COPY /bin/run-tests /etc/
+COPY /bin/package.json  /home/${USERNAME}/rfcode/
 
 COPY /install/install.sh /tmp/
 RUN dos2unix /tmp/install.sh; \
