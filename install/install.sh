@@ -32,8 +32,9 @@ chmod 777 /etc/run-tests
 dos2unix /etc/run-tests
 
 echo "$(timestamp) rfbrowser initialization"
-PLAYWRIGHT_BROWSERS_PATH=$ROBOT_BROWSER_DIR
 rfbrowser init
+npm i -g playwright
 npx playwright install
 npx playwright install-deps
+npm run dev
 rm -rf  /tmp/*
