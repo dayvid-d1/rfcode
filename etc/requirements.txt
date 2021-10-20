@@ -31,7 +31,6 @@ allure-python-commons
 allure-robotframework
 Appium-Python-Client
 axe-selenium-python
-python-dateutil
 python-xlib
 python3-xlib
 robotframework
