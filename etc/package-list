@@ -22,3 +22,4 @@ make
 node-gyp
 yarn
 build-essential
+gnupg
