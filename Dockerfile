@@ -5,7 +5,7 @@ COPY /bin/novnc.sh /etc/
 RUN . /etc/novnc.sh; \
     rm /etc/novnc.sh
 
-FROM python:3.8-buster
+FROM ubuntu:20.04
 
 ARG USERNAME
 ENV USER_UID=1000 \
@@ -33,6 +33,7 @@ COPY /etc /etc/
 
 COPY /install/setup.sh /tmp/
 RUN chmod +x /tmp/setup.sh; \
+    dos2unix /tmp/setup.sh; \
     . /tmp/setup.sh
 
 COPY /bin/menu.xml /etc/xdg/openbox/
@@ -42,6 +43,7 @@ COPY /bin/package.json  /home/${USERNAME}/rfcode/
 
 COPY /install/install.sh /tmp/
 RUN chmod +x /tmp/install.sh; \
+    dos2unix /tmp/setup.sh; \
     . /tmp/install.sh
 
 WORKDIR /home/app/rfcode

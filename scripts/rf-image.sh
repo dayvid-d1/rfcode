@@ -243,4 +243,4 @@ docker run \
   -p ${RF_PORT}:8080 \
   $RF_IMAGE
 
-docker exec -i ${RF_CONTAINER_NAME} "/etc/run-tests"
+docker exec -i ${RF_CONTAINER_NAME} "//etc/run-tests"
