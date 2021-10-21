@@ -5,7 +5,7 @@ COPY /bin/novnc.sh /etc/
 RUN . /etc/novnc.sh; \
     rm /etc/novnc.sh
 
-FROM ubuntu:20.04
+FROM python:3.8-buster
 
 ARG USERNAME
 ENV USER_UID=1000 \
