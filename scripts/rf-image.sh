@@ -208,6 +208,11 @@ mkdir -p "$RF_RESOURCES/logs"
 mkdir -p "$RF_RESOURCES/setup"
 mkdir -p "$RF_RESOURCES/data"
 
+chmod -R 777 $RF_RESOURCES/reports
+chmod -R 777 $RF_RESOURCES/logs
+chmod -R 777 $RF_RESOURCES/setup
+chmod -R 777 $RF_RESOURCES/data
+chmod -R 777 $RF_RESOURCES/test
 
 echo "$(timestamp) Initiating RF container run"
 docker run \
@@ -216,6 +221,7 @@ docker run \
   --rm \
   --detach \
   -v "/${RF_RESOURCES}/test":/home/app/rfcode/test \
+  -v "/${RF_RESOURCES}/reports":/home/app/rfcode/reports \
   -v=$RF_VOLUME_NAME \
   -e ROBOT_THREADS=4 \
   -e TZ=${CONTINENT}/${PLACE} \
