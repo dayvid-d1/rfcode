@@ -214,6 +214,7 @@ docker run \
   --name=$RF_CONTAINER_NAME \
   --privileged \
   --rm \
+  --detach \
   -v "/${RF_RESOURCES}/test":/home/app/rfcode/test \
   -v=$RF_VOLUME_NAME \
   -e ROBOT_THREADS=4 \
@@ -232,3 +233,5 @@ docker run \
   -e AUTO_BROWSER=${AUTO_BROWSER} \
   -p ${RF_PORT}:8080 \
   $RF_IMAGE
+
+docker exec -i ${RF_CONTAINER_NAME} /etc/run-tests
