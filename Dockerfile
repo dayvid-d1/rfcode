@@ -5,7 +5,7 @@ COPY /bin/novnc.sh /etc/
 RUN . /etc/novnc.sh; \
     rm /etc/novnc.sh
 
-FROM node:14
+FROM ubuntu:20.04
 
 ARG USERNAME
 ENV USER_UID=1000 \
@@ -30,8 +30,6 @@ ENV USER_UID=1000 \
     
 COPY --from=easy-novnc-build /bin/easy-novnc /usr/local/bin/
 COPY /etc /etc/
-
-RUN apt-get update -y; apt-get install dos2unix -y
 
 COPY /install/setup.sh /tmp/
 RUN chmod +x /tmp/setup.sh; \
