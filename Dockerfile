@@ -31,6 +31,8 @@ ENV USER_UID=1000 \
 COPY --from=easy-novnc-build /bin/easy-novnc /usr/local/bin/
 COPY /etc /etc/
 
+RUN apt-get update -y; apt-get install dos2unix -y
+
 COPY /install/setup.sh /tmp/
 RUN chmod +x /tmp/setup.sh; \
     /tmp/setup.sh
@@ -39,8 +41,6 @@ COPY /bin/menu.xml /etc/xdg/openbox/
 COPY /bin/supervisord.conf /etc/
 COPY /bin/run-tests /etc/
 COPY /bin/package.json  /home/${USERNAME}/rfcode/
-
-RUN apt-get update -y; apt-get install dos2unix -y;
 
 COPY /install/install.sh /tmp/
 RUN chmod +x /tmp/install.sh; \
