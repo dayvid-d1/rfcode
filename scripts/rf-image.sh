@@ -222,6 +222,9 @@ docker run \
   --detach \
   -v "/${RF_RESOURCES}/test":/home/app/rfcode/test \
   -v "/${RF_RESOURCES}/reports":/home/app/rfcode/reports \
+  -v "/${RF_RESOURCES}/data":/home/app/rfcode/data \
+  -v "/${RF_RESOURCES}/setup":/home/app/rfcode/setup \
+  -v "/${RF_RESOURCES}/logs":/var/logs \
   -v=$RF_VOLUME_NAME \
   -e ROBOT_THREADS=4 \
   -e TZ=${CONTINENT}/${PLACE} \
