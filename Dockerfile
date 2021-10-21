@@ -5,7 +5,7 @@ COPY /bin/novnc.sh /etc/
 RUN . /etc/novnc.sh; \
     rm /etc/novnc.sh
 
-FROM debian:buster
+FROM node:14
 
 ARG USERNAME
 ENV USER_UID=1000 \
