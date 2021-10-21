@@ -23,8 +23,8 @@ ENV USER_UID=1000 \
     PLAYWRIGHT_BROWSERS_PATH=${ROBOT_BROWSER_DIR} \
     ROBOT_TESTS_DIR=/home/${USERNAME}/rfcode/test \
     ROBOT_REPORTS_DIR=/home/${USERNAME}/rfcode/reports \
-    RUN_TESTS=/home/${USERNAME}/rfcode/run-tests \
-    PATH=$PATH:${ROBOT_REPORTS_DIR}:${ROBOT_TESTS_DIR}:${ROBOT_SETUP_DIR} \
+    RUN_TESTS=/etc/run-tests \
+    PATH=$PATH:${ROBOT_REPORTS_DIR}:${ROBOT_TESTS_DIR}:${ROBOT_SETUP_DIR}:${RUN_TESTS} \
     AUTO_BROWSER=chromium \
     NODE_PATH=/usr/lib/node_modules
     
