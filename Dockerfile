@@ -35,6 +35,7 @@ RUN apt-get update -y; apt-get install dos2unix -y
 
 COPY /install/setup.sh /tmp/
 RUN chmod +x /tmp/setup.sh; \
+    dos2unix /tmp/setup.sh; \
     /tmp/setup.sh
 
 COPY /bin/menu.xml /etc/xdg/openbox/
@@ -44,6 +45,7 @@ COPY /bin/package.json  /home/${USERNAME}/rfcode/
 
 COPY /install/install.sh /tmp/
 RUN chmod +x /tmp/install.sh; \
+    dos2unix /tmp/setup.sh; \
     /tmp/install.sh
 
 WORKDIR /home/app/rfcode
