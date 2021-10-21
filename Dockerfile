@@ -40,6 +40,8 @@ COPY /bin/supervisord.conf /etc/
 COPY /bin/run-tests /etc/
 COPY /bin/package.json  /home/${USERNAME}/rfcode/
 
+RUN apt-get update -y; apt-get install dos2unix -y;
+
 COPY /install/install.sh /tmp/
 RUN chmod +x /tmp/install.sh; \
     /tmp/install.sh
