@@ -17,5 +17,4 @@ apt-get install -yqq nodejs
 
 pip3 install --disable-pip-version-check --no-cache-dir --no-warn-script-location -r /etc/requirements.txt
 
-rm -rf /var/lib/apt/lists /var/cache/apt/*.bin
-apt-get clean
+rm -rf /var/lib/apt/lists

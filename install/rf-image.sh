@@ -7,25 +7,8 @@ set -o errexit
 function usage {
   echo "Usage: ./slims-image.sh [ -i | --image] [ -v | --vname] [ -n | --cname] [ -r | --resources]
                                 [ -c | --continent] [ -l | --location] [ -t | --threads] [ -z | --zip] [ -a | --allure]
-                                [ -u | --upload] [ -g | --gc] [ -s | --symlink] [ -p | --port]
-                                [ -o | --cbrowser] [ -w | --abrowser] [ -m | --uname] [ -h | --help ]"
-  echo " -i  | --image                        RF Image f.e. '-i rf-image:latest'"
-  echo " -v  | --vname                        Volumne name f.e. '-v rf-vol'"
-  echo " -n  | --cname                        Container name f.e. '-n rf-app'"
-  echo " -r  | --resources                    Resource directory f.e. '-d ./rfcode'"
-  echo " -c  | --continent                    Continent f.e. '-c America'"  
-  echo " -l  | --location                     Location f.e. '-l New York'"
-  echo " -t  | --threads                      Robot threads f.e. '-t 4'"
-  echo " -z  | --zip                          Zip report f.e. '-z true'"
-  echo " -a  | --allure                       Allure report f.e. '-a true'"
-  echo " -u  | --upload                       AWS Upload f.e. '-u true'"
-  echo " -g  | --gc                           Playwright skip browser gc f.e. '-g 1'"
-  echo " -s  | --symlink                      NVM Symlink Current f.e. '-s true'"
-  echo " -p  | --port                         Port f.e. '-p 8080'"  
-  echo " -m  | --uname                        Username f.e. '-m app'"  
-  echo " -o  | --cbrowser                     Cross Browser f.e. '-o false'" 
-  echo " -w  | --abrowser                     Auto Browser f.e. '-a chromium'" 
-  echo " -h  | --help                         Show this menu"
+                                [ -u | --upload] [ -g | --gc] [ -s | --symlink]
+                                [ -o | --cbrowser] [ -w | --abrowser] [ -h | --help ]"
 }
 
 CURRENT_DIR=${PWD}
@@ -47,8 +30,6 @@ ALLURE_REPORT=''
 AWS_UPLOAD_TO_S3=''
 PLAYWRIGHT_SKIP_BROWSER_GC=''
 NVM_SYMLINK_CURRENT=''
-RF_PORT=''
-RF_USER=''
 
 CROSS_BROWSER=''
 AUTO_BROWSER=''
@@ -98,15 +79,7 @@ while(($#)) ; do
         -s | --symlink )                shift
                                         NVM_SYMLINK_CURRENT="$1"
                                         shift
-                                        ;;
-        -p | --port )                   shift
-                                        RF_PORT="$1"
-                                        shift
-                                        ;;
-        -m | --uname )                  shift
-                                        RF_USER="$1"
-                                        shift
-                                        ;;        
+                                        ;;      
         -r | --resources )              shift
                                         RF_RESOURCES="$1"
                                         shift
@@ -173,13 +146,6 @@ fi
 if [[ ! -n "$NVM_SYMLINK_CURRENT" ]]; then
 	NVM_SYMLINK_CURRENT=true
 fi
-if [[ ! -n "$RF_PORT" ]]; then
-	RF_PORT=8080
-fi
-if [[ ! -n "$RF_USER" ]]; then
-	echo "$(timestamp) ERROR: Username not provided"
-	exit 1
-fi
 
 if [ ! -z $(docker ps -q -f name=${RF_CONTAINER_NAME}) ]; then    
   docker container stop ${RF_CONTAINER_NAME}
@@ -239,8 +205,7 @@ docker run \
   -e PABOT_OPTIONS="--testlevelsplit --artifactsinsubfolders" \
   -e ROBOT_OPTIONS="--loglevel DEBUG" \
   -e CROSS_BROWSER=${CROSS_BROWSER} \
-  -e AUTO_BROWSER=${AUTO_BROWSER} \
-  -p ${RF_PORT}:8080 \
+  -e AUTO_BROWSER=${AUTO_BROWSER} \  
   $RF_IMAGE
 
 docker exec -i ${RF_CONTAINER_NAME} "//etc/run-tests"
