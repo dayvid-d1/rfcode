@@ -17,7 +17,7 @@ curl -sOL https://raw.githubusercontent.com/dayvid-d1/rfcode/master/install/rf-i
 chmod +x ./rf-image.sh
 ./rf-image.sh \
     -i ${RF_IMAGE} \
-    -t ${ROBOT_THREADS} \        
+    -t ${ROBOT_THREADS} \
     -r ${RESOURCES}
 
 #===================================================================================
