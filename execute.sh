@@ -13,7 +13,7 @@ RF_USER=app
 RESOURCES="$PWD/workspace"
 
 rm -rf "$PWD/workspace/reports/*"
-curl -O -L https://github.com/dayvid-d1/rfcode/blob/master/install/rf-image.sh
+curl -sOL https://raw.githubusercontent.com/dayvid-d1/rfcode/master/install/rf-image.sh
 chmod +x ./rf-image.sh
 ./rf-image.sh \
     -i ${RF_IMAGE} \
@@ -33,7 +33,7 @@ CADDY_USER="app"
 CADDY_SECRET="JDJhJDEwJDNwT1ZKamJrRGEwdDNYWEN0RlBrdU9NcE5FazNabW0xVVk0dXpReUUxaWtiVEtoR1hJMUdt"
 CADDY_PORT=8129
 
-curl -O -L caddy-image.sh https://github.com/dayvid-d1/caddy/blob/master/caddy-image.sh
+curl -sOL https://raw.githubusercontent.com/dayvid-d1/caddy/master/install/caddy-image.sh
 chmod +x ./caddy-image.sh
 ./caddy-image.sh \
     -i ${CADDY_IMAGE} \
