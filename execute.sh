@@ -7,7 +7,7 @@ set -o errexit
 echo "RF-IMAGE SETUP"
 #===================================================================================
 
-RF_IMAGE=davidclement/rf-image:test
+RF_IMAGE=davidclement/rf-image:latest
 ROBOT_THREADS=4
 RF_USER=app
 RESOURCES="$PWD/workspace"
