@@ -15,6 +15,7 @@ mkdir -p $ROBOT_BROWSER_DIR
 mkdir -p $ROBOT_TESTS_DIR
 mkdir -p $ROBOT_REPORTS_DIR
 mkdir -p /usr/share/desktop-directories
+export RUN_TESTS
 
 echo "$(timestamp) Accessibility rights for: "$USERNAME
 export PATH=$PATH:${ROBOT_REPORTS_DIR}:${ROBOT_TESTS_DIR}:${ROBOT_SETUP_DIR}:${RUN_TESTS}
