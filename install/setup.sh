@@ -19,8 +19,7 @@ cd Python-3.8.9
 ./configure --enable-optimizations
 make -j 4
 make altinstall
-
-apt-get install python3.8-dev libffi-dev libssl-dev python3.8-pip
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py python3.8 get-pip.py
 
 curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 apt-get install -yqq nodejs
