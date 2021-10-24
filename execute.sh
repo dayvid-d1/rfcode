@@ -7,7 +7,7 @@ set -o errexit
 echo "RF-IMAGE SETUP"
 #===================================================================================
 
-RF_IMAGE=ghcr.io/dayvid-d1/rf-image:test
+RF_IMAGE="ghcr.io/dayvid-d1/rf-image:test"
 ROBOT_THREADS=4
 RF_USER=app
 RESOURCES="$PWD/workspace"
