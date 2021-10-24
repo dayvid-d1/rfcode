@@ -207,4 +207,4 @@ docker run \
   -e AUTO_BROWSER=${AUTO_BROWSER} \
   $RF_IMAGE
 
-docker exec -i ${RF_CONTAINER_NAME} "dos2unix ${RUN_TESTS} && ${RUN_TESTS}"
+docker exec -i ${RF_CONTAINER_NAME} //etc/run-tests
