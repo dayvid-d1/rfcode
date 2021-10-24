@@ -16,9 +16,8 @@ xargs apt-get install -y --no-install-recommends </etc/package-list
 wget https://www.python.org/ftp/python/3.8.9/Python-3.8.9.tgz
 tar xzf Python-3.8.9.tgz
 cd Python-3.8.9
-./configure --enable-optimizations
+. ./configure --enable-optimizations
 make -j 2
-cd Python-3.8.9
 make alt install
 
 
