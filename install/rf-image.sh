@@ -7,7 +7,7 @@ set -o errexit
 usage() {
   echo "Usage: ./slims-image.sh [ -i | --image] [ -v | --vname] [ -n | --cname] [ -r | --resources]
                                 [ -c | --continent] [ -l | --location] [ -t | --threads] [ -z | --zip] [ -a | --allure]
-                                [ -u | --upload] [ -g | --gc] [ -s | --symlink]
+                                [ -u | --upload] [ -g | --gc] [ -s | --symlink] [ -s | --symlink] [ -p | --person]
                                 [ -o | --cbrowser] [ -w | --abrowser] [ -h | --help ]"
 }
 
@@ -21,6 +21,7 @@ RF_IMAGE=''
 RF_CONTAINER_NAME=''
 RF_VOLUME_NAME=''
 RF_RESOURCES=''
+RF_USER=''
 
 CONTINENT=''
 PLACE=''
@@ -91,6 +92,10 @@ while(($#)) ; do
         -w | --abrowser )               shift
                                         AUTO_BROWSER="$1"
                                         shift
+                                        ;;                                                
+        -p | --person )                 shift
+                                        RF_USER="$1"
+                                        shift
                                         ;;
         -h | --help )                   shift
                                         usage
@@ -106,6 +111,9 @@ done
 if [[ ! -n "$RF_IMAGE" ]]; then
 	echo "$(timestamp) ERROR: RF image name not provided"
 	exit 1
+fi
+if [[ ! -n "$RF_USER" ]]; then
+	RF_USER="app"
 fi
 if [[ ! -n "$RF_CONTAINER_NAME" ]]; then
 	RF_CONTAINER_NAME="rfcode-app"
@@ -185,6 +193,7 @@ docker run \
   --name=$RF_CONTAINER_NAME \
   --privileged \
   --detach \
+  --user $RF_USER \
   -v "/${RF_RESOURCES}/test":/home/app/rfcode/test \
   -v "/${RF_RESOURCES}/reports":/home/app/rfcode/reports \
   -v "/${RF_RESOURCES}/data":/home/app/rfcode/data \
