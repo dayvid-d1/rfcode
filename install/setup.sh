@@ -20,10 +20,11 @@ cd Python-3.8.9
 make -j 4
 make altinstall
 
+apt-get install python3.8-dev libffi-dev libssl-dev python3.8-pip
 
 curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 apt-get install -yqq nodejs
 
-pip install --disable-pip-version-check --no-cache-dir --no-warn-script-location -r /etc/requirements.txt
+pip3 install --disable-pip-version-check --no-cache-dir --no-warn-script-location -r /etc/requirements.txt
 
 rm -rf /var/lib/apt/lists
