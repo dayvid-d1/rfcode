@@ -215,4 +215,4 @@ docker run \
   -e AUTO_BROWSER=${AUTO_BROWSER} \
   $RF_IMAGE
 
-docker run --name rfcode-app "//etc//run-tests"
+docker exec -i ${RF_CONTAINER_NAME} "${RUN_TESTS}"
