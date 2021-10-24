@@ -30,8 +30,8 @@ echo "$(timestamp) Permissions for others"
 chmod -R 777 $ROBOT_DIR
 chmod -R 777 /dev/stdout
 chmod -R 777 /var/log
-chmod 777 /etc/run-tests
-dos2unix /etc/run-tests
+chmod 777 /etc/run-tests.sh
+dos2unix /etc/run-tests.sh
 
 echo "$(timestamp) rfbrowser initialization"
 rfbrowser init

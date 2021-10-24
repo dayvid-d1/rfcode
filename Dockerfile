@@ -23,7 +23,7 @@ ENV USER_UID=1000 \
     PLAYWRIGHT_BROWSERS_PATH=${ROBOT_BROWSER_DIR} \
     ROBOT_TESTS_DIR=/home/${USERNAME}/rfcode/test \
     ROBOT_REPORTS_DIR=/home/${USERNAME}/rfcode/reports \
-    RUN_TESTS=/etc/run-tests \
+    RUN_TESTS=/etc/run-tests.sh \
     AUTO_BROWSER=chromium \
     NODE_PATH=/usr/lib/node_modules
     
@@ -37,7 +37,7 @@ RUN chmod +x /tmp/setup.sh; \
 
 COPY /bin/menu.xml /etc/xdg/openbox/
 COPY /bin/supervisord.conf /etc/
-COPY /bin/run-tests /etc/
+COPY /bin/run-tests.sh /etc/
 COPY /bin/package.json  /home/${USERNAME}/rfcode/
 
 COPY /install/install.sh /tmp/
