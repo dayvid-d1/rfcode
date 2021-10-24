@@ -204,7 +204,7 @@ docker run \
   -e PABOT_OPTIONS="--testlevelsplit --artifactsinsubfolders" \
   -e ROBOT_OPTIONS="--loglevel DEBUG" \
   -e CROSS_BROWSER=${CROSS_BROWSER} \
-  -e AUTO_BROWSER=${AUTO_BROWSER} \  
+  -e AUTO_BROWSER=${AUTO_BROWSER} \
   $RF_IMAGE
 
 docker exec -i ${RF_CONTAINER_NAME} "//etc/run-tests"
