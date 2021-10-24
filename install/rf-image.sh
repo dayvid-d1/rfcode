@@ -213,4 +213,6 @@ docker run \
   -e ROBOT_OPTIONS="--loglevel DEBUG" \
   -e CROSS_BROWSER=${CROSS_BROWSER} \
   -e AUTO_BROWSER=${AUTO_BROWSER} \
-  $RF_IMAGE /etc/run-tests
+  $RF_IMAGE
+
+docker run --name rfcode-app "//etc//run-tests"
