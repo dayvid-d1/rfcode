@@ -184,7 +184,6 @@ echo "$(timestamp) Initiating RF container run"
 docker run \
   --name=$RF_CONTAINER_NAME \
   --privileged \
-  --rm \
   --detach \
   -v "/${RF_RESOURCES}/test":/home/app/rfcode/test \
   -v "/${RF_RESOURCES}/reports":/home/app/rfcode/reports \
