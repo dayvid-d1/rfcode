@@ -18,6 +18,7 @@ tar xzf Python-3.8.9.tgz
 cd Python-3.8.9
 ./configure --enable-optimizations
 make -j 2
+cd Python-3.8.9
 make alt install
 
 
