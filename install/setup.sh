@@ -24,6 +24,6 @@ make altinstall
 curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 apt-get install -yqq nodejs
 
-pip3 install --disable-pip-version-check --no-cache-dir --no-warn-script-location -r /etc/requirements.txt
+pip install --disable-pip-version-check --no-cache-dir --no-warn-script-location -r /etc/requirements.txt
 
 rm -rf /var/lib/apt/lists
