@@ -17,6 +17,7 @@ mkdir -p $ROBOT_REPORTS_DIR
 mkdir -p /usr/share/desktop-directories
 
 echo "$(timestamp) Accessibility rights for: "$USERNAME
+export PATH=$PATH:${ROBOT_REPORTS_DIR}:${ROBOT_TESTS_DIR}:${ROBOT_SETUP_DIR}:${RUN_TESTS}
 groupadd --gid $USER_GID $USERNAME
 useradd --home-dir $ROBOT_DIR --shell /bin/bash --uid $USER_UID --gid $USER_GID $USERNAME
 chown -R $USERNAME:$USERNAME $ROBOT_DIR
