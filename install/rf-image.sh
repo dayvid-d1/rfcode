@@ -213,6 +213,7 @@ docker run \
   -e ROBOT_OPTIONS="--loglevel DEBUG" \
   -e CROSS_BROWSER=${CROSS_BROWSER} \
   -e AUTO_BROWSER=${AUTO_BROWSER} \
+  -e RUN_TESTS=/etc/run-tests \
   $RF_IMAGE
 
 docker exec -i ${RF_CONTAINER_NAME} "${RUN_TESTS}"
