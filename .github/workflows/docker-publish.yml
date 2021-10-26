@@ -108,7 +108,7 @@ jobs:
       - name: Test GitHub image
         run: |
          chmod +x ./execute.sh
-         ./execute.sh -t ${{ secrets.workflow }}
+         ./execute.sh -t ${{ secrets.GITHUB_TOKEN }}
 
       - name: Image digest
         run: echo ${{ steps.docker_build_docker.outputs.digest }}
