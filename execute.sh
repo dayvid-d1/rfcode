@@ -109,7 +109,7 @@ chmod +x ./rf-image.sh
 #===================================================================================
 echo "CADDY SETUP"
 #===================================================================================
-
+CADDY_TOKEN="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"
 CADDY_URL="https://api.github.com/repos/dayvid-d1/caddy/contents/caddy-image.sh"
 curl -H 'Authorization: token '${CADDY_TOKEN}\
     -H 'Accept: application/vnd.github.v3.raw'\
