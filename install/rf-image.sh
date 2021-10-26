@@ -5,7 +5,7 @@ set -o nounset
 set -o errexit
 
 usage() {
-  echo "Usage: ./slims-image.sh [ -i | --image] [ -v | --vname] [ -n | --cname] [ -r | --resources]
+  echo "Usage: ./rf-image.sh [ -i | --image] [ -v | --vname] [ -n | --cname] [ -r | --resources]
                                 [ -c | --continent] [ -l | --location] [ -t | --threads] [ -z | --zip] [ -a | --allure]
                                 [ -u | --upload] [ -g | --gc] [ -s | --symlink] [ -s | --symlink] [ -p | --person]
                                 [ -o | --cbrowser] [ -w | --abrowser] [ -h | --help ]"
