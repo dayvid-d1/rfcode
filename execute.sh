@@ -35,10 +35,10 @@ CADDY_PORT=8129
 
 curl -sOL https://raw.githubusercontent.com/dayvid-d1/caddy/master/caddy-image.sh?token=ATN6XKVBPO5GR4PO3W5LRODBPADCW
 chmod +x ./caddy-image.sh
-./caddy-image.sh \
-    -i ${CADDY_IMAGE} \
-    -u ${USER} \
-    -s ${CADDY_SECRET} \
-    -p ${CADDY_PORT}
+#./caddy-image.sh \
+#    -i ${CADDY_IMAGE} \
+#    -u ${USER} \
+#    -s ${CADDY_SECRET} \
+#    -p ${CADDY_PORT}
 #===================================================================================
 #===================================================================================
