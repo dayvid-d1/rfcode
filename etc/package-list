@@ -44,3 +44,4 @@ libc6-dev
 libbz2-dev
 libffi-dev
 zlib1g-dev
+x11vnc

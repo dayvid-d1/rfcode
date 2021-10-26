@@ -3,7 +3,7 @@
     <menu id="root-menu" label="Openbox 3">
         <item label="RF-Code">
             <action name="Execute">
-                <execute>/etc/run-tests</execute>
+                <execute>/etc/run-tests.sh</execute>
             </action>
         </item>
         <item label="Terminal">

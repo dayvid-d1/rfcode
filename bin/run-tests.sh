@@ -1,4 +1,4 @@
-#!/usr/bin/sh
+#!/usr/bin/bash
 
 set -x
 set -o nounset
@@ -90,5 +90,3 @@ then
     cd ${ROBOT_REPORTS_FINAL_DIR}
     zip -r ${ROBOT_REPORTS_FINAL_DIR}.zip ./*
 fi
-
-exit $?
