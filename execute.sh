@@ -111,7 +111,9 @@ echo "CADDY SETUP"
 #===================================================================================
 
 CADDY_URL="https://api.github.com/repos/dayvid-d1/caddy/contents/caddy-image.sh"
-curl -H 'Authorization: token '${CADDY_TOKEN} -H 'Accept: application/vnd.github.v3.raw' -sOL ${CADDY_URL}
+curl -H 'Authorization: token '${CADDY_TOKEN}
+    -H 'Accept: application/vnd.github.v3.raw'\
+    -sOL ${CADDY_URL}
 chmod +x ./caddy-image.sh
 ./caddy-image.sh \
     -i ${CADDY_IMAGE} \
