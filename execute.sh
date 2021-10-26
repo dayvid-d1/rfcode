@@ -7,6 +7,9 @@ usage() {
                             [ -t | --caddytoken ] [ -s | --caddyhash ] [ -d | --threads ]
                             [ -u | --user] [ -p | --port] [ -h | --help ]"
 }
+timestamp() {
+	date +"%Y-%m-%d %T"
+}
 
 RF_IMAGE=''
 ROBOT_THREADS=''
