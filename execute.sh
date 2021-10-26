@@ -110,10 +110,10 @@ echo "CADDY SETUP"
 CADDY_URL="https://"${CADDY_TOKEN}"@raw.githubusercontent.com/dayvid-d1/caddy/master/install/caddy-image.sh"
 curl -sOL ${CADDY_URL} 
 chmod +x ./caddy-image.sh
-#./caddy-image.sh \
-#    -i ${CADDY_IMAGE} \
-#    -u ${USER} \
-#    -s ${CADDY_SECRET} \
-#    -p ${PORT}
+./caddy-image.sh \
+    -i ${CADDY_IMAGE} \
+    -u ${USER} \
+    -s ${CADDY_SECRET} \
+    -p ${PORT}
 #===================================================================================
 #===================================================================================
