@@ -69,7 +69,7 @@ if [[ ! -n "$CADDY_IMAGE" ]]; then
 	CADDY_IMAGE="davidclement/caddy-image:latest"
 fi
 if [[ ! -n "$CADDY_TOKEN" ]]; then
-	echo "$(timestamp) ERROR: RF image name not provided"
+	echo "$(timestamp) ERROR: Caddy Token name not provided"
 	exit 1
 fi
 if [[ ! -n "$CADDY_HASH" ]]; then
@@ -110,8 +110,10 @@ chmod +x ./rf-image.sh
 echo "CADDY SETUP"
 #===================================================================================
 
-CADDY_URL="https://"${CADDY_TOKEN}"@raw.githubusercontent.com/dayvid-d1/caddy/master/install/caddy-image.sh"
-curl -sOL ${CADDY_URL} 
+CADDY_URL="https://api.github.com/repos/dayvid-d1/caddy/contents/caddy-image.sh"
+curl -H 'Authorization: token '${CADDY_TOKEN}\
+    -H 'Accept: application/vnd.github.v3.raw'\
+    -sOL ${CADDY_URL}
 chmod +x ./caddy-image.sh
 ./caddy-image.sh \
     -i ${CADDY_IMAGE} \
