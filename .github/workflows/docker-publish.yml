@@ -25,7 +25,6 @@ env:
   VERSION: latest
   TEST_USER: app
   TEST_PORT: 8181
-  CADDY_TOKEN: ${{ secrets.workflow }}
 
 jobs:
   # Push to latest in github
@@ -109,7 +108,7 @@ jobs:
       - name: Test GitHub image
         run: |
          chmod +x ./execute.sh
-         ./execute.sh -t ${{ env.CADDY_TOKEN }}
+         ./execute.sh -t ${{ secrets.REST_TOKEN }}
 
       - name: Image digest
         run: echo ${{ steps.docker_build_docker.outputs.digest }}
