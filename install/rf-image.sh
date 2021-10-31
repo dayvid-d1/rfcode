@@ -214,6 +214,4 @@ docker run \
   -e CROSS_BROWSER=${CROSS_BROWSER} \
   -e AUTO_BROWSER=${AUTO_BROWSER} \
   -e RUN_TESTS="/etc/run-tests.sh" \
-  $RF_IMAGE
-  
- docker exec -i ${RF_CONTAINER_NAME} "chmod 777 /etc/run-tests.sh && dos2unix /etc/run-tests.sh && /etc/run-tests.sh"
+  $RF_IMAGE "${RUN_TESTS}"
