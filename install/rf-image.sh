@@ -216,4 +216,4 @@ docker run \
   -e RUN_TESTS="/etc/run-tests.sh" \
   $RF_IMAGE
   
- docker exec -i ${RF_CONTAINER_NAME} /etc/run-tests.sh
+ docker exec -i ${RF_CONTAINER_NAME} "sh -c /etc/run-tests.sh"
