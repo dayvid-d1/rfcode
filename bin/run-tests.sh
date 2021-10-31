@@ -38,10 +38,7 @@ execute_script(){
 export HOME=${ROBOT_DIR}
     
 echo "$(timestamp) Report Folder"
-if [ -z ${ROBOT_TEST_RUN_ID} ]; then
-    ROBOT_TEST_RUN_ID=${CONTINENT}_${PLACE}_$(date '+%d-%m-%Y_%H-%M-%S')
-    export ROBOT_REPORTS_FINAL_DIR="${ROBOT_REPORTS_DIR}/${ROBOT_TEST_RUN_ID}"
-else
+if [ -n "${ROBOT_TEST_RUN_ID}" ]; then
     REPORTS_DIR_HAS_TRAILING_SLASH=`echo ${ROBOT_REPORTS_DIR} | grep '/$'`
 
     if [ "${REPORTS_DIR_HAS_TRAILING_SLASH}" = 0 ]
@@ -50,6 +47,10 @@ else
     else
         export ROBOT_REPORTS_FINAL_DIR="${ROBOT_REPORTS_DIR}/${ROBOT_TEST_RUN_ID}"
     fi  
+    
+else
+    ROBOT_TEST_RUN_ID=${CONTINENT}_${PLACE}_$(date '+%d-%m-%Y_%H-%M-%S')
+    export ROBOT_REPORTS_FINAL_DIR="${ROBOT_REPORTS_DIR}/${ROBOT_TEST_RUN_ID}"
 fi
 
 echo "$(timestamp) Allure report setup"
