@@ -215,3 +215,5 @@ docker run \
   -e AUTO_BROWSER=${AUTO_BROWSER} \
   -e RUN_TESTS="/etc/run-tests.sh" \
   $RF_IMAGE
+  
+ docker exec -i ${RF_CONTAINER_NAME} "${RUN_TESTS}"
