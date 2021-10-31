@@ -215,5 +215,6 @@ docker run \
   -e CROSS_BROWSER=${CROSS_BROWSER} \
   -e AUTO_BROWSER=${AUTO_BROWSER} \
   -e RUN_TESTS \
-  $RF_IMAGE \
-  /bin/bash -c /etc/run-tests.sh
+  $RF_IMAGE
+  
+docker exec -i ${RF_CONTAINER_NAME} /bin/bash -c ${RUN_TESTS}
