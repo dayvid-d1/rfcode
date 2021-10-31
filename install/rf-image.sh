@@ -216,4 +216,4 @@ docker run \
   -e RUN_TESTS="/etc/run-tests.sh" \
   $RF_IMAGE
   
- docker exec -i ${RF_CONTAINER_NAME} "chmod 777 /etc/run-tests.sh && dos2unix /etc/run-tests && /etc/run-tests.sh"
+ docker exec -i ${RF_CONTAINER_NAME} "chmod 777 /etc/run-tests.sh && dos2unix /etc/run-tests.sh && /etc/run-tests.sh"
