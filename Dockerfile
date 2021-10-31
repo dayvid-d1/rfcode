@@ -5,7 +5,7 @@ COPY /bin/novnc.sh /etc/
 RUN . /etc/novnc.sh; \
     rm /etc/novnc.sh
 
-FROM debian:buster
+FROM ubuntu:20.04
 
 ARG USERNAME
 ENV USER_UID=1000 \
