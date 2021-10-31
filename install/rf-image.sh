@@ -188,6 +188,8 @@ chmod -R 777 $RF_RESOURCES/setup
 chmod -R 777 $RF_RESOURCES/data
 chmod -R 777 $RF_RESOURCES/test
 
+RUN_TESTS="/etc/run-tests.sh"
+
 echo "$(timestamp) Initiating RF container run"
 docker run \
   --name=$RF_CONTAINER_NAME \
@@ -213,5 +215,6 @@ docker run \
   -e ROBOT_OPTIONS="--loglevel DEBUG" \
   -e CROSS_BROWSER=${CROSS_BROWSER} \
   -e AUTO_BROWSER=${AUTO_BROWSER} \
-  -e RUN_TESTS="/etc/run-tests.sh" \
-  $RF_IMAGE "${RUN_TESTS}"
+  -e RUN_TESTS \
+  $RF_IMAGE \
+  /bin/bash -c /etc/run-tests.sh
