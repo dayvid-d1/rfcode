@@ -1,8 +1,6 @@
 #!/usr/bin/bash
 
 set -x
-set -o nounset
-set -o errexit
 
 timestamp() {
 	date +"%Y-%m-%d %T"
