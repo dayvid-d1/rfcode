@@ -1,6 +1,8 @@
 #!/usr/bin/bash
 
 set -x
+set -o nounset
+set -o errexit
 
 usage() {
   echo "Usage: ./rf-image.sh [ -i | --image] [ -v | --vname] [ -n | --cname] [ -r | --resources]
@@ -192,6 +194,7 @@ echo "$(timestamp) Initiating RF container run"
 docker run \
   --name=$RF_CONTAINER_NAME \
   --privileged \
+  --detach \
   -v "/${RF_RESOURCES}/test":/home/app/rfcode/test \
   -v "/${RF_RESOURCES}/reports":/home/app/rfcode/reports \
   -v "/${RF_RESOURCES}/data":/home/app/rfcode/data \
@@ -215,4 +218,4 @@ docker run \
   -e RUN_TESTS \
   $RF_IMAGE
   
-docker exec -i ${RF_CONTAINER_NAME} /bin/bash -c ${RUN_TESTS}
+docker exec -i ${RF_CONTAINER_NAME} /etc/run-tests.sh
