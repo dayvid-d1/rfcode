@@ -1,8 +1,6 @@
 #!/usr/bin/bash
 
 set -x
-set -o nounset
-set -o errexit
 
 usage() {
   echo "Usage: ./rf-image.sh [ -i | --image] [ -v | --vname] [ -n | --cname] [ -r | --resources]
