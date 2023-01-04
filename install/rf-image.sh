@@ -169,6 +169,8 @@ if [ "$(docker container inspect -f '{{.State.Status}}' ${RF_CONTAINER_NAME})" =
   fi
 fi  
 
+RUN_TESTS='//etc/run-tests.sh'
+
 echo "$(timestamp) Pulling latest image"
 docker pull $RF_IMAGE  
 
@@ -215,7 +217,7 @@ docker run \
   -e ROBOT_OPTIONS="--loglevel DEBUG" \
   -e CROSS_BROWSER=${CROSS_BROWSER} \
   -e AUTO_BROWSER=${AUTO_BROWSER} \
-  -e RUN_TESTS \
+  -e RUN_TESTS=${RUN_TESTS} \
   $RF_IMAGE
   
-docker exec -i ${RF_CONTAINER_NAME} /etc/run-tests.sh
+docker exec -i ${RF_CONTAINER_NAME} bash -c ${RUN_TESTS}
