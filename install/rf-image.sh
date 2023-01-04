@@ -220,4 +220,4 @@ docker run \
   -e RUN_TESTS=${RUN_TESTS} \
   $RF_IMAGE
   
-docker exec -i ${RF_CONTAINER_NAME} bash -c ${RUN_TESTS}
+docker exec -i ${RF_CONTAINER_NAME} /bin/bash -c ${RUN_TESTS}
