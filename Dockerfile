@@ -41,7 +41,7 @@ COPY /bin/package.json  /home/${USERNAME}/rfcode/
 
 COPY /install/install.sh /tmp/
 RUN chmod +x /tmp/install.sh; \
-    dos2unix /tmp/setup.sh; \
+    dos2unix /tmp/install.sh; \
     . /tmp/install.sh
 
 WORKDIR /home/app/rfcode
