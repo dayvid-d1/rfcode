@@ -22,7 +22,7 @@ ENV USER_UID=1000 \
     ROBOT_BROWSER_DIR=/home/${USERNAME}/rfcode/setup/pw-browsers \
     PLAYWRIGHT_BROWSERS_PATH=${ROBOT_BROWSER_DIR} \
     ROBOT_TESTS_DIR=/home/${USERNAME}/rfcode/test \
-    ROBOT_REPORTS_DIR=/home/${USERNAME}/rfcode/reports \    
+    ROBOT_REPORTS_DIR=/home/${USERNAME}/rfcode/reports \
     AUTO_BROWSER=chromium \
     NODE_PATH=/usr/lib/node_modules
     
